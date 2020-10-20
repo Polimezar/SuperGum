@@ -23,6 +23,12 @@ main {
   overflow-x: hidden;
 }
 
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
