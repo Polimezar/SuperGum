@@ -1,4 +1,3 @@
-/* stylelint-disable */
 /*! picturefill - v3.0.2 - 2016-02-12
  * https://scottjehl.github.io/picturefill/
  * Copyright (c) 2016 https://github.com/scottjehl/picturefill/blob/master/Authors.txt; Licensed MIT
@@ -8,21 +7,22 @@
  * Firefox's early picture implementation (prior to FF41) is static and does
  * not react to viewport changes. This tiny module fixes this.
  */
+
 (function(window) {
 	/*jshint eqnull:true */
 	var ua = navigator.userAgent;
 
 	if ( window.HTMLPictureElement && ((/ecko/).test(ua) && ua.match(/rv\:(\d+)/) && RegExp.$1 < 45) ) {
-		addEventListener("resize", (function() {
+		addEventListener('resize', (function() {
 			var timer;
 
-			var dummySrc = document.createElement("source");
+			var dummySrc = document.createElement('source');
 
 			var fixRespimg = function(img) {
 				var source, sizes;
 				var picture = img.parentNode;
 
-				if (picture.nodeName.toUpperCase() === "PICTURE") {
+				if (picture.nodeName.toUpperCase() === 'PICTURE') {
 					source = dummySrc.cloneNode();
 
 					picture.insertBefore(source, picture.firstElementChild);
@@ -32,7 +32,7 @@
 				} else if (!img._pfLastSize || img.offsetWidth > img._pfLastSize) {
 					img._pfLastSize = img.offsetWidth;
 					sizes = img.sizes;
-					img.sizes += ",100vw";
+					img.sizes += ',100vw';
 					setTimeout(function() {
 						img.sizes = sizes;
 					});
@@ -41,7 +41,7 @@
 
 			var findPictureImgs = function() {
 				var i;
-				var imgs = document.querySelectorAll("picture > img, img[srcset][sizes]");
+				var imgs = document.querySelectorAll('picture > img, img[srcset][sizes]');
 				for (i = 0; i < imgs.length; i++) {
 					fixRespimg(imgs[i]);
 				}
@@ -50,7 +50,7 @@
 				clearTimeout(timer);
 				timer = setTimeout(findPictureImgs, 99);
 			};
-			var mq = window.matchMedia && matchMedia("(orientation: landscape)");
+			var mq = window.matchMedia && matchMedia('(orientation: landscape)');
 			var init = function() {
 				onResize();
 
@@ -59,12 +59,12 @@
 				}
 			};
 
-			dummySrc.srcset = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+			dummySrc.srcset = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
-			if (/^[c|i]|d$/.test(document.readyState || "")) {
+			if (/^[c|i]|d$/.test(document.readyState || '')) {
 				init();
 			} else {
-				document.addEventListener("DOMContentLoaded", init);
+				document.addEventListener('DOMContentLoaded', init);
 			}
 
 			return onResize;
@@ -80,17 +80,17 @@
 
 (function( window, document, undefined ) {
 	// Enable strict mode
-	"use strict";
+	'use strict';
 
 	// HTML shim|v it for old IE (IE9 will still need the HTML video tag workaround)
-	document.createElement( "picture" );
+	document.createElement( 'picture' );
 
 	var warn, eminpx, alwaysCheckWDescriptor, evalId;
 	// local object for method references and testing exposure
 	var pf = {};
 	var isSupportTestReady = false;
 	var noop = function() {};
-	var image = document.createElement( "img" );
+	var image = document.createElement( 'img' );
 	var getImgAttr = image.getAttribute;
 	var setImgAttr = image.setAttribute;
 	var removeImgAttr = image.removeAttribute;
@@ -98,15 +98,15 @@
 	var types = {};
 	var cfg = {
 		//resource selection:
-		algorithm: ""
+		algorithm: ''
 	};
-	var srcAttr = "data-pfsrc";
-	var srcsetAttr = srcAttr + "set";
+	var srcAttr = 'data-pfsrc';
+	var srcsetAttr = srcAttr + 'set';
 	// ua sniffing is done for undetectable img loading features,
 	// to do some non crucial perf optimizations
 	var ua = navigator.userAgent;
 	var supportAbort = (/rident/).test(ua) || ((/ecko/).test(ua) && ua.match(/rv\:(\d+)/) && RegExp.$1 > 35 );
-	var curSrcProp = "currentSrc";
+	var curSrcProp = 'currentSrc';
 	var regWDesc = /\s+\+?\d+(e\d+)?w/;
 	var regSize = /(\([^)]+\))?\s*(.+)/;
 	var setOptions = window.picturefillCFG;
@@ -114,8 +114,8 @@
 	 * Shortcut property for https://w3c.github.io/webappsec/specs/mixedcontent/#restricts-mixed-content ( for easy overriding in tests )
 	 */
 	// baseStyle also used by getEmValue (i.e.: width: 1em is important)
-	var baseStyle = "position:absolute;left:0;visibility:hidden;display:block;padding:0;border:none;font-size:1em;width:1em;overflow:hidden;clip:rect(0px, 0px, 0px, 0px)";
-	var fsCss = "font-size:100%!important;";
+	var baseStyle = 'position:absolute;left:0;visibility:hidden;display:block;padding:0;border:none;font-size:1em;width:1em;overflow:hidden;clip:rect(0px, 0px, 0px, 0px)';
+	var fsCss = 'font-size:100%!important;';
 	var isVwDirty = true;
 
 	var cssCache = {};
@@ -123,16 +123,16 @@
 	var DPR = window.devicePixelRatio;
 	var units = {
 		px: 1,
-		"in": 96
+		'in': 96
 	};
-	var anchor = document.createElement( "a" );
+	var anchor = document.createElement( 'a' );
 	/**
 	 * alreadyRun flag used for setOptions. is it true setOptions will reevaluate
 	 * @type {boolean}
 	 */
 	var alreadyRun = false;
 
-	// Reusable, non-"g" Regexes
+	// Reusable, non-'g' Regexes
 
 	// (Don't use \s, to avoid matching non-breaking space.)
 	var regexLeadingSpaces = /^[ \t\n\r\u000c]+/,
@@ -152,7 +152,7 @@
 		if ( obj.addEventListener ) {
 			obj.addEventListener(evt, fn, capture || false);
 		} else if ( obj.attachEvent ) {
-			obj.attachEvent( "on" + evt, fn);
+			obj.attachEvent( 'on' + evt, fn);
 		}
 	};
 
@@ -175,11 +175,11 @@
 	// Manual is faster than RegEx
 	// http://jsperf.com/whitespace-character/5
 	function isSpace(c) {
-		return (c === "\u0020" || // space
-		        c === "\u0009" || // horizontal tab
-		        c === "\u000A" || // new line
-		        c === "\u000C" || // form feed
-		        c === "\u000D");  // carriage return
+		return (c === '\u0020' || // space
+		        c === '\u0009' || // horizontal tab
+		        c === '\u000A' || // new line
+		        c === '\u000C' || // form feed
+		        c === '\u000D');  // carriage return
 	}
 
 	/**
@@ -202,27 +202,27 @@
 
 		var buildStr = memoize(function(css) {
 
-			return "return " + replace((css || "").toLowerCase(),
+			return 'return ' + replace((css || '').toLowerCase(),
 				// interpret `and`
-				/\band\b/g, "&&",
+				/\band\b/g, '&&',
 
 				// interpret `,`
-				/,/g, "||",
+				/,/g, '||',
 
 				// interpret `min-` as >=
-				/min-([a-z-\s]+):/g, "e.$1>=",
+				/min-([a-z-\s]+):/g, 'e.$1>=',
 
 				// interpret `max-` as <=
-				/max-([a-z-\s]+):/g, "e.$1<=",
+				/max-([a-z-\s]+):/g, 'e.$1<=',
 
 				//calc value
-				/calc([^)]+)/g, "($1)",
+				/calc([^)]+)/g, '($1)',
 
 				// interpret css values
-				/(\d+[\.]*[\d]*)([a-z]+)/g, "($1 * e.$2)",
+				/(\d+[\.]*[\d]*)([a-z]+)/g, '($1 * e.$2)',
 				//make eval less evil
-				/^(?!(e.[a-z]|[0-9\.&=|><\+\-\*\(\)\/])).*/ig, ""
-			) + ";";
+				/^(?!(e.[a-z]|[0-9\.&=|><\+\-\*\(\)\/])).*/ig, ''
+			) + ';';
 		});
 
 		return function(css, length) {
@@ -233,8 +233,8 @@
 					cssCache[css] = parsedLength[ 1 ] * units[parsedLength[ 2 ]];
 				} else {
 					/*jshint evil:true */
-					try {
-						cssCache[css] = new Function("e", buildStr(css))(units);
+					try{
+						cssCache[css] = new Function('e', buildStr(css))(units);
 					} catch(e) {}
 					/*jshint evil:false */
 				}
@@ -245,7 +245,7 @@
 
 	var setResolution = function( candidate, sizesattr ) {
 		if ( candidate.w ) { // h = means height: || descriptor.type === 'h' do not handle yet...
-			candidate.cWidth = pf.calcListLength( sizesattr || "100vw" );
+			candidate.cWidth = pf.calcListLength( sizesattr || '100vw' );
 			candidate.res = candidate.w / candidate.cWidth ;
 		} else {
 			candidate.res = candidate.d;
@@ -266,7 +266,7 @@
 		var options = opt || {};
 
 		if ( options.elements && options.elements.nodeType === 1 ) {
-			if ( options.elements.nodeName.toUpperCase() === "IMG" ) {
+			if ( options.elements.nodeName.toUpperCase() === 'IMG' ) {
 				options.elements =  [ options.elements ];
 			} else {
 				options.context = options.elements;
@@ -303,13 +303,13 @@
 	;
 
 	if ( !(curSrcProp in image) ) {
-		curSrcProp = "src";
+		curSrcProp = 'src';
 	}
 
 	// Add support for standard mime types.
-	types[ "image/jpeg" ] = true;
-	types[ "image/gif" ] = true;
-	types[ "image/png" ] = true;
+	types[ 'image/jpeg' ] = true;
+	types[ 'image/gif' ] = true;
+	types[ 'image/png' ] = true;
 
 	function detectTypeSupport( type, typeUri ) {
 		// based on Modernizr's lossless img-webp test
@@ -324,11 +324,11 @@
 			picturefill();
 		};
 		image.src = typeUri;
-		return "pending";
+		return 'pending';
 	}
 
 	// test svg support
-	types[ "image/svg+xml" ] = document.implementation.hasFeature( "http://www.w3.org/TR/SVG11/feature#Image", "1.1" );
+	types[ 'image/svg+xml' ] = document.implementation.hasFeature( 'http://www.w3.org/TR/SVG11/feature#Image', '1.1' );
 
 	/**
 	 * updates the internal vW property with the current viewport width in px
@@ -348,7 +348,7 @@
 		units.vw = units.width / 100;
 		units.vh = units.height / 100;
 
-		evalId = [ units.height, units.width, DPR ].join("-");
+		evalId = [ units.height, units.width, DPR ].join('-');
 
 		units.em = pf.getEmValue();
 		units.rem = units.em;
@@ -358,7 +358,7 @@
 		var bonusFactor, tooMuch, bonus, meanDensity;
 
 		//experimental
-		if (cfg.algorithm === "saveData" ){
+		if (cfg.algorithm === 'saveData' ){
 			if ( lowerValue > 2.7 ) {
 				meanDensity = dprValue + 1;
 			} else {
@@ -386,7 +386,7 @@
 		var srcSetCandidates;
 		var matchingSet = pf.getSet( img );
 		var evaluated = false;
-		if ( matchingSet !== "pending" ) {
+		if ( matchingSet !== 'pending' ) {
 			evaluated = evalId;
 			if ( matchingSet ) {
 				srcSetCandidates = pf.setRes( matchingSet );
@@ -442,20 +442,20 @@
 		// SPEC mismatch intended for size and perf:
 		// actually only source elements preceding the img should be used
 		// also note: don't use qsa here, because IE8 sometimes doesn't like source as the key part in a selector
-		var sources = picture.getElementsByTagName( "source" );
+		var sources = picture.getElementsByTagName( 'source' );
 
 		for ( i = 0, len = sources.length; i < len; i++ ) {
 			source = sources[ i ];
 			source[ pf.ns ] = true;
-			srcset = source.getAttribute( "srcset" );
+			srcset = source.getAttribute( 'srcset' );
 
 			// if source does not have a srcset attribute, skip
 			if ( srcset ) {
 				candidates.push( {
 					srcset: srcset,
-					media: source.getAttribute( "media" ),
-					type: source.getAttribute( "type" ),
-					sizes: source.getAttribute( "sizes" )
+					media: source.getAttribute( 'media' ),
+					type: source.getAttribute( 'type' ),
+					sizes: source.getAttribute( 'sizes' )
 				} );
 			}
 		}
@@ -472,8 +472,8 @@
 	 */
 
 	// 1. Let input be the value passed to this algorithm.
-	// (TO-DO : Explain what "set" argument is here. Maybe choose a more
-	// descriptive & more searchable name.  Since passing the "set" in really has
+	// (TO-DO : Explain what 'set' argument is here. Maybe choose a more
+	// descriptive & more searchable name.  Since passing the 'set' in really has
 	// nothing to do with parsing proper, I would prefer this assignment eventually
 	// go in an external fn.)
 	function parseSrcset(input, set) {
@@ -533,7 +533,7 @@
 
 				// If the descriptor consists of a valid non-negative integer followed by
 				// a U+0077 LATIN SMALL LETTER W character
-				if (regexNonNegativeInteger.test(value) && (lastChar === "w")) {
+				if (regexNonNegativeInteger.test(value) && (lastChar === 'w')) {
 
 					// If width and density are not both absent, then let error be yes.
 					if (w || d) {pError = true;}
@@ -545,7 +545,7 @@
 
 				// If the descriptor consists of a valid floating-point number followed by
 				// a U+0078 LATIN SMALL LETTER X character
-				} else if (regexFloatingPoint.test(value) && (lastChar === "x")) {
+				} else if (regexFloatingPoint.test(value) && (lastChar === 'x')) {
 
 					// If width, density and future-compat-h are not all absent, then let error
 					// be yes.
@@ -558,7 +558,7 @@
 
 				// If the descriptor consists of a valid non-negative integer followed by
 				// a U+0068 LATIN SMALL LETTER H character
-				} else if (regexNonNegativeInteger.test(value) && (lastChar === "h")) {
+				} else if (regexNonNegativeInteger.test(value) && (lastChar === 'h')) {
 
 					// If height and density are not both absent, then let error be yes.
 					if (h || d) {pError = true;}
@@ -601,10 +601,10 @@
 			collectCharacters(regexLeadingSpaces);
 
 			// 8.2. Let current descriptor be the empty string.
-			currentDescriptor = "";
+			currentDescriptor = '';
 
 			// 8.3. Let state be in descriptor.
-			state = "in descriptor";
+			state = 'in descriptor';
 
 			while (true) {
 
@@ -612,11 +612,11 @@
 				c = input.charAt(pos);
 
 				//  Do the following depending on the value of state.
-				//  For the purpose of this step, "EOF" is a special character representing
+				//  For the purpose of this step, 'EOF' is a special character representing
 				//  that position is past the end of input.
 
 				// In descriptor
-				if (state === "in descriptor") {
+				if (state === 'in descriptor') {
 					// Do the following, depending on the value of c:
 
 				  // Space character
@@ -626,15 +626,15 @@
 					if (isSpace(c)) {
 						if (currentDescriptor) {
 							descriptors.push(currentDescriptor);
-							currentDescriptor = "";
-							state = "after descriptor";
+							currentDescriptor = '';
+							state = 'after descriptor';
 						}
 
 					// U+002C COMMA (,)
 					// Advance position to the next character in input. If current descriptor
 					// is not empty, append current descriptor to descriptors. Jump to the step
 					// labeled descriptor parser.
-					} else if (c === ",") {
+					} else if (c === ',') {
 						pos += 1;
 						if (currentDescriptor) {
 							descriptors.push(currentDescriptor);
@@ -644,14 +644,14 @@
 
 					// U+0028 LEFT PARENTHESIS (()
 					// Append c to current descriptor. Set state to in parens.
-					} else if (c === "\u0028") {
+					} else if (c === '\u0028') {
 						currentDescriptor = currentDescriptor + c;
-						state = "in parens";
+						state = 'in parens';
 
 					// EOF
 					// If current descriptor is not empty, append current descriptor to
 					// descriptors. Jump to the step labeled descriptor parser.
-					} else if (c === "") {
+					} else if (c === '') {
 						if (currentDescriptor) {
 							descriptors.push(currentDescriptor);
 						}
@@ -663,21 +663,21 @@
 					} else {
 						currentDescriptor = currentDescriptor + c;
 					}
-				// (end "in descriptor"
+				// (end 'in descriptor'
 
 				// In parens
-				} else if (state === "in parens") {
+				} else if (state === 'in parens') {
 
 					// U+0029 RIGHT PARENTHESIS ())
 					// Append c to current descriptor. Set state to in descriptor.
-					if (c === ")") {
+					if (c === ')') {
 						currentDescriptor = currentDescriptor + c;
-						state = "in descriptor";
+						state = 'in descriptor';
 
 					// EOF
 					// Append current descriptor to descriptors. Jump to the step labeled
 					// descriptor parser.
-					} else if (c === "") {
+					} else if (c === '') {
 						descriptors.push(currentDescriptor);
 						parseDescriptors();
 						return;
@@ -689,21 +689,21 @@
 					}
 
 				// After descriptor
-				} else if (state === "after descriptor") {
+				} else if (state === 'after descriptor') {
 
 					// Do the following, depending on the value of c:
 					// Space character: Stay in this state.
 					if (isSpace(c)) {
 
 					// EOF: Jump to the step labeled descriptor parser.
-					} else if (c === "") {
+					} else if (c === '') {
 						parseDescriptors();
 						return;
 
 					// Anything else
 					// Set state to in descriptor. Set position to the previous character in input.
 					} else {
-						state = "in descriptor";
+						state = 'in descriptor';
 						pos -= 1;
 
 					}
@@ -737,8 +737,8 @@
 			// 8. If url ends with a U+002C COMMA character (,), follow these substeps:
 			//		(1). Remove all trailing U+002C COMMA characters from url. If this removed
 			//         more than one character, that is a parse error.
-			if (url.slice(-1) === ",") {
-				url = url.replace(regexTrailingCommas, "");
+			if (url.slice(-1) === ',') {
+				url = url.replace(regexTrailingCommas, '');
 				// (Jump ahead to step 9 to skip tokenization and just push the candidate).
 				parseDescriptors();
 
@@ -756,7 +756,7 @@
 	 *
 	 * By Alex Bell |  MIT License
 	 *
-	 * Non-strict but accurate and lightweight JS Parser for the string value <img sizes="here">
+	 * Non-strict but accurate and lightweight JS Parser for the string value <img sizes='here'>
 	 *
 	 * Reference algorithm at:
 	 * https://html.spec.whatwg.org/multipage/embedded-content.html#parse-a-sizes-attribute
@@ -770,11 +770,11 @@
 	 * <source-size-value> = <length>
 	 * http://www.w3.org/html/wg/drafts/html/master/embedded-content.html#attr-img-sizes
 	 *
-	 * E.g. "(max-width: 30em) 100vw, (max-width: 50em) 70vw, 100vw"
-	 * or "(min-width: 30em), calc(30vw - 15px)" or just "30vw"
+	 * E.g. '(max-width: 30em) 100vw, (max-width: 50em) 70vw, 100vw'
+	 * or '(min-width: 30em), calc(30vw - 15px)' or just '30vw'
 	 *
 	 * Returns the first valid <css-length> with a media condition that evaluates to true,
-	 * or "100vw" if all valid media conditions evaluate to false.
+	 * or '100vw' if all valid media conditions evaluate to false.
 	 *
 	 */
 
@@ -810,7 +810,7 @@
 		//  Returns an array of arrays.)
 		function parseComponentValues(str) {
 			var chrctr;
-			var component = "";
+			var component = '';
 			var componentArray = [];
 			var listArray = [];
 			var parenDepth = 0;
@@ -820,7 +820,7 @@
 			function pushComponent() {
 				if (component) {
 					componentArray.push(component);
-					component = "";
+					component = '';
 				}
 			}
 
@@ -835,12 +835,12 @@
 			while (true) {
 				chrctr = str.charAt(pos);
 
-				if (chrctr === "") { // ( End of string reached.)
+				if (chrctr === '') { // ( End of string reached.)
 					pushComponent();
 					pushComponentArray();
 					return listArray;
 				} else if (inComment) {
-					if ((chrctr === "*") && (str[pos + 1] === "/")) { // (At end of a comment.)
+					if ((chrctr === '*') && (str[pos + 1] === '/')) { // (At end of a comment.)
 						inComment = false;
 						pos += 2;
 						pushComponent();
@@ -862,18 +862,18 @@
 						continue;
 					} else {
 						// (Replace any space character with a plain space for legibility.)
-						chrctr = " ";
+						chrctr = ' ';
 					}
-				} else if (chrctr === "(") {
+				} else if (chrctr === '(') {
 					parenDepth += 1;
-				} else if (chrctr === ")") {
+				} else if (chrctr === ')') {
 					parenDepth -= 1;
-				} else if (chrctr === ",") {
+				} else if (chrctr === ',') {
 					pushComponent();
 					pushComponentArray();
 					pos += 1;
 					continue;
-				} else if ( (chrctr === "/") && (str.charAt(pos + 1) === "*") ) {
+				} else if ( (chrctr === '/') && (str.charAt(pos + 1) === '*') ) {
 					inComment = true;
 					pos += 2;
 					continue;
@@ -888,9 +888,9 @@
 			if (regexCssLengthWithUnits.test(s) && (parseFloat(s) >= 0)) {return true;}
 			if (regexCssCalc.test(s)) {return true;}
 			// ( http://www.w3.org/TR/CSS2/syndata.html#numbers says:
-			// "-0 is equivalent to 0 and is not a negative number." which means that
+			// '-0 is equivalent to 0 and is not a negative number.' which means that
 			// unitless zero and unitless negative zero must be accepted as special cases.)
-			if ((s === "0") || (s === "-0") || (s === "+0")) {return true;}
+			if ((s === '0') || (s === '-0') || (s === '+0')) {return true;}
 			return false;
 		}
 
@@ -944,7 +944,7 @@
 			// and the payoff is unclear. Is there ever an situation where the
 			// media condition parses incorrectly but still somehow evaluates to true?
 			// Can we just rely on the browser/polyfill to do it?)
-			unparsedSize = unparsedSize.join(" ");
+			unparsedSize = unparsedSize.join(' ');
 			if (!(pf.matchesMedia( unparsedSize ) ) ) {
 				continue;
 			}
@@ -955,35 +955,35 @@
 
 		// If the above algorithm exhausts unparsed sizes list without returning a
 		// size value, return 100vw.
-		return "100vw";
+		return '100vw';
 	}
 
 	// namespace
-	pf.ns = ("pf" + new Date().getTime()).substr(0, 9);
+	pf.ns = ('pf' + new Date().getTime()).substr(0, 9);
 
 	// srcset support test
-	pf.supSrcset = "srcset" in image;
-	pf.supSizes = "sizes" in image;
+	pf.supSrcset = 'srcset' in image;
+	pf.supSizes = 'sizes' in image;
 	pf.supPicture = !!window.HTMLPictureElement;
 
 	// UC browser does claim to support srcset and picture, but not sizes,
 	// this extended test reveals the browser does support nothing
 	if (pf.supSrcset && pf.supPicture && !pf.supSizes) {
 		(function(image2) {
-			image.srcset = "data:,a";
-			image2.src = "data:,a";
+			image.srcset = 'data:,a';
+			image2.src = 'data:,a';
 			pf.supSrcset = image.complete === image2.complete;
 			pf.supPicture = pf.supSrcset && pf.supPicture;
-		})(document.createElement("img"));
+		})(document.createElement('img'));
 	}
 
 	// Safari9 has basic support for sizes, but does't expose the `sizes` idl attribute
 	if (pf.supSrcset && !pf.supSizes) {
 
 		(function() {
-			var width2 = "data:image/gif;base64,R0lGODlhAgABAPAAAP///wAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==";
-			var width1 = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
-			var img = document.createElement("img");
+			var width2 = 'data:image/gif;base64,R0lGODlhAgABAPAAAP///wAAACH5BAAAAAAALAAAAAACAAEAAAICBAoAOw==';
+			var width1 = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+			var img = document.createElement('img');
 			var test = function() {
 				var width = img.width;
 
@@ -1000,9 +1000,9 @@
 
 			img.onload = test;
 			img.onerror = test;
-			img.setAttribute("sizes", "9px");
+			img.setAttribute('sizes', '9px');
 
-			img.srcset = width1 + " 1w," + width2 + " 9w";
+			img.srcset = width1 + ' 1w,' + width2 + ' 9w';
 			img.src = width1;
 		})();
 
@@ -1012,7 +1012,7 @@
 
 	// using pf.qsa instead of dom traversing does scale much better,
 	// especially on sites mixing responsive and non-responsive images
-	pf.selShort = "picture>img,img[srcset]";
+	pf.selShort = 'picture>img,img[srcset]';
 	pf.sel = pf.selShort;
 	pf.cfg = cfg;
 
@@ -1046,7 +1046,7 @@
 	 * @returns {NodeList|Array}
 	 */
 	pf.qsa = function(context, sel) {
-		return ( "querySelector" in context ) ? context.querySelectorAll(sel) : [];
+		return ( 'querySelector' in context ) ? context.querySelectorAll(sel) : [];
 	};
 
 	/**
@@ -1055,7 +1055,7 @@
 	 * @returns {boolean}
 	 */
 	pf.matchesMedia = function() {
-		if ( window.matchMedia && (matchMedia( "(min-width: 0.1em)" ) || {}).matches ) {
+		if ( window.matchMedia && (matchMedia( '(min-width: 0.1em)' ) || {}).matches ) {
 			pf.matchesMedia = function( media ) {
 				return !media || ( matchMedia( media ).matches );
 			};
@@ -1109,7 +1109,7 @@
 	 * @returns {*}
 	 */
 	pf.parseSize = memoize(function( sourceSizeStr ) {
-		var match = ( sourceSizeStr || "" ).match(regSize);
+		var match = ( sourceSizeStr || '' ).match(regSize);
 		return {
 			media: match && match[1],
 			length: match && match[2]
@@ -1131,7 +1131,7 @@
 	pf.getEmValue = function() {
 		var body;
 		if ( !eminpx && (body = document.body) ) {
-			var div = document.createElement( "div" ),
+			var div = document.createElement( 'div' ),
 				originalHTMLCSS = docElem.style.cssText,
 				originalBodyCSS = body.style.cssText;
 
@@ -1175,11 +1175,11 @@
 
 	/**
 	 * Takes a candidate object with a srcset property in the form of url/
-	 * ex. "images/pic-medium.png 1x, images/pic-medium-2x.png 2x" or
-	 *     "images/pic-medium.png 400w, images/pic-medium-2x.png 800w" or
-	 *     "images/pic-small.png"
+	 * ex. 'images/pic-medium.png 1x, images/pic-medium-2x.png 2x' or
+	 *     'images/pic-medium.png 400w, images/pic-medium-2x.png 800w' or
+	 *     'images/pic-small.png'
 	 * Get an array of image candidates in the form of
-	 *      {url: "/foo/bar.png", resolution: 1}
+	 *      {url: '/foo/bar.png', resolution: 1}
 	 * where resolution is http://dev.w3.org/csswg/css-values-3/#resolution-value
 	 * If sizes is specified, res is calculated
 	 */
@@ -1227,7 +1227,7 @@
 			if ( !abortCurSrc ) {
 				curCan.cached = true;
 
-				// if current candidate is "best", "better" or "okay",
+				// if current candidate is 'best', 'better' or 'okay',
 				// set it to bestCandidate
 				if ( curCan.res >= dpr ) {
 					bestCandidate = curCan;
@@ -1282,9 +1282,9 @@
 		img.src = bestCandidate.url;
 
 		// although this is a specific Safari issue, we don't want to take too much different code paths
-		if ( bestCandidate.set.type === "image/svg+xml" ) {
+		if ( bestCandidate.set.type === 'image/svg+xml' ) {
 			origWidth = img.style.width;
-			img.style.width = (img.offsetWidth + 1) + "px";
+			img.style.width = (img.offsetWidth + 1) + 'px';
 
 			// next line only should trigger a repaint
 			// if... is only done to trick dead code removal
@@ -1306,7 +1306,7 @@
 				continue;
 			}
 
-			if ( supportsType === "pending" ) {
+			if ( supportsType === 'pending' ) {
 				set = supportsType;
 			}
 
@@ -1320,11 +1320,11 @@
 	pf.parseSets = function( element, parent, options ) {
 		var srcsetAttribute, imageSet, isWDescripor, srcsetParsed;
 
-		var hasPicture = parent && parent.nodeName.toUpperCase() === "PICTURE";
+		var hasPicture = parent && parent.nodeName.toUpperCase() === 'PICTURE';
 		var imageData = element[ pf.ns ];
 
 		if ( imageData.src === undefined || options.src ) {
-			imageData.src = getImgAttr.call( element, "src" );
+			imageData.src = getImgAttr.call( element, 'src' );
 			if ( imageData.src ) {
 				setImgAttr.call( element, srcAttr, imageData.src );
 			} else {
@@ -1333,7 +1333,7 @@
 		}
 
 		if ( imageData.srcset === undefined || options.srcset || !pf.supSrcset || element.srcset ) {
-			srcsetAttribute = getImgAttr.call( element, "srcset" );
+			srcsetAttribute = getImgAttr.call( element, 'srcset' );
 			imageData.srcset = srcsetAttribute;
 			srcsetParsed = true;
 		}
@@ -1348,16 +1348,16 @@
 		if ( imageData.srcset ) {
 			imageSet = {
 				srcset: imageData.srcset,
-				sizes: getImgAttr.call( element, "sizes" )
+				sizes: getImgAttr.call( element, 'sizes' )
 			};
 
 			imageData.sets.push( imageSet );
 
-			isWDescripor = (alwaysCheckWDescriptor || imageData.src) && regWDesc.test(imageData.srcset || "");
+			isWDescripor = (alwaysCheckWDescriptor || imageData.src) && regWDesc.test(imageData.srcset || '');
 
 			// add normal src as candidate, if source has no w descriptor
 			if ( !isWDescripor && imageData.src && !getCandidateForSrc(imageData.src, imageSet) && !imageSet.has1x ) {
-				imageSet.srcset += ", " + imageData.src;
+				imageSet.srcset += ', ' + imageData.src;
 				imageSet.cands.push({
 					url: imageData.src,
 					d: 1,
@@ -1382,7 +1382,7 @@
 		if ( srcsetParsed && pf.supSrcset && !imageData.supported ) {
 			if ( srcsetAttribute ) {
 				setImgAttr.call( element, srcsetAttr, srcsetAttribute );
-				element.srcset = "";
+				element.srcset = '';
 			} else {
 				removeImgAttr.call( element, srcsetAttr );
 			}
@@ -1390,7 +1390,7 @@
 
 		if (imageData.supported && !imageData.srcset && ((!imageData.src && element.src) ||  element.src !== pf.makeUrl(imageData.src))) {
 			if (imageData.src === null) {
-				element.removeAttribute("src");
+				element.removeAttribute('src');
 			} else {
 				element.src = imageData.src;
 			}
@@ -1446,9 +1446,9 @@
 			var regReady = window.attachEvent ? /d$|^c/ : /d$|^c|^i/;
 
 			var run = function() {
-				var readyState = document.readyState || "";
+				var readyState = document.readyState || '';
 
-				timerId = setTimeout(run, readyState === "loading" ? 200 :  999);
+				timerId = setTimeout(run, readyState === 'loading' ? 200 :  999);
 				if ( document.body ) {
 					pf.fillImgs();
 					isDomReady = isDomReady || regReady.test(readyState);
@@ -1493,8 +1493,8 @@
 				}
 			};
 
-			on( window, "resize", debounce(onResize, 99 ) );
-			on( document, "readystatechange", run );
+			on( window, 'resize', debounce(onResize, 99 ) );
+			on( document, 'readystatechange', run );
 		})();
 	}
 
@@ -1510,7 +1510,7 @@
 		pf: pf,
 		push: function(args) {
 			var name = args.shift();
-			if (typeof pf[name] === "function") {
+			if (typeof pf[name] === 'function') {
 				pf[name].apply(pf, args);
 			} else {
 				cfg[name] = args[0];
@@ -1529,20 +1529,20 @@
 	window.picturefill = picturefill;
 
 	/* expose picturefill */
-	if ( typeof module === "object" && typeof module.exports === "object" ) {
+	if ( typeof module === 'object' && typeof module.exports === 'object' ) {
 		// CommonJS, just export
 		module.exports = picturefill;
-	} else if ( typeof define === "function" && define.amd ) {
+	} else if ( typeof define === 'function' && define.amd ) {
 		// AMD support
-		define( "picturefill", function() { return picturefill; } );
+		define( 'picturefill', function() { return picturefill; } );
 	}
 
 	// IE8 evals this sync, so it must be the last thing we do
-	if (!pf.supPicture) {
-		types["image/webp"] = detectTypeSupport("image/webp", "data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==" );
+	if ( !pf.supPicture ) {
+		types[ 'image/webp' ] = detectTypeSupport('image/webp', 'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAABBxAR/Q9ERP8DAABWUDggGAAAADABAJ0BKgEAAQADADQlpAADcAD++/1QAA==' );
 	}
 
-})(window, document);
+} )( window, document );
 
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
@@ -1820,7 +1820,7 @@
           return el.dom7ElementDataStorage[key];
         }
 
-        var dataKey = el.getAttribute(("data-" + key));
+        var dataKey = el.getAttribute(('data-' + key));
         if (dataKey) {
           return dataKey;
         }
@@ -1852,7 +1852,7 @@
 
   function transition(duration) {
     if (typeof duration !== 'string') {
-      duration = duration + "ms"; // eslint-disable-line
+      duration = duration + 'ms'; // eslint-disable-line
     }
     for (var i = 0; i < this.length; i += 1) {
       var elStyle = this[i].style;
@@ -2875,7 +2875,7 @@
     if (!Class.prototype.modules) {
       Class.prototype.modules = {};
     }
-    var name = module.name || (((Object.keys(Class.prototype.modules).length) + "_" + (Utils.now())));
+    var name = module.name || (((Object.keys(Class.prototype.modules).length) + '_' + (Utils.now())));
     Class.prototype.modules[name] = module;
     // Prototype
     if (module.proto) {
@@ -2953,7 +2953,7 @@
     var wrongRTL = swiper.wrongRTL;
     var isVirtual = swiper.virtual && params.virtual.enabled;
     var previousSlidesLength = isVirtual ? swiper.virtual.slides.length : swiper.slides.length;
-    var slides = $wrapperEl.children(("." + (swiper.params.slideClass)));
+    var slides = $wrapperEl.children(('.' + (swiper.params.slideClass)));
     var slidesLength = isVirtual ? swiper.virtual.slides.length : slides.length;
     var snapGrid = [];
     var slidesGrid = [];
@@ -3066,8 +3066,8 @@
           column = i - (row * slidesPerRow);
         }
         slide.css(
-          ("margin-" + (swiper.isHorizontal() ? 'top' : 'left')),
-          (row !== 0 && params.spaceBetween) && (((params.spaceBetween) + "px"))
+          ('margin-' + (swiper.isHorizontal() ? 'top' : 'left')),
+          (row !== 0 && params.spaceBetween) && (((params.spaceBetween) + 'px'))
         );
       }
       if (slide.css('display') === 'none') {
@@ -3133,9 +3133,9 @@
 
         if (slides[i]) {
           if (swiper.isHorizontal()) {
-            slides[i].style.width = slideSize + "px";
+            slides[i].style.width = slideSize + 'px';
           } else {
-            slides[i].style.height = slideSize + "px";
+            slides[i].style.height = slideSize + 'px';
           }
         }
       }
@@ -3186,17 +3186,17 @@
     if (
       rtl && wrongRTL && (params.effect === 'slide' || params.effect === 'coverflow')) {
       $wrapperEl.css({
-        width: ((swiper.virtualSize + params.spaceBetween) + "px")
+        width: ((swiper.virtualSize + params.spaceBetween) + 'px')
       });
     }
     if (params.setWrapperSize) {
       if (swiper.isHorizontal()) {
         $wrapperEl.css({
-          width: ((swiper.virtualSize + params.spaceBetween) + "px")
+          width: ((swiper.virtualSize + params.spaceBetween) + 'px')
         });
       } else {
         $wrapperEl.css({
-          height: ((swiper.virtualSize + params.spaceBetween) + "px")
+          height: ((swiper.virtualSize + params.spaceBetween) + 'px')
         });
       }
     }
@@ -3206,11 +3206,11 @@
       swiper.virtualSize = Math.ceil(swiper.virtualSize / params.slidesPerColumn) - params.spaceBetween;
       if (swiper.isHorizontal()) {
         $wrapperEl.css({
-          width: ((swiper.virtualSize + params.spaceBetween) + "px")
+          width: ((swiper.virtualSize + params.spaceBetween) + 'px')
         });
       } else {
         $wrapperEl.css({
-          height: ((swiper.virtualSize + params.spaceBetween) + "px")
+          height: ((swiper.virtualSize + params.spaceBetween) + 'px')
         });
       }
       if (params.centeredSlides) {
@@ -3253,16 +3253,16 @@
       if (swiper.isHorizontal()) {
         if (rtl) {
           slides.filter(slidesForMargin).css({
-            marginLeft: (spaceBetween + "px")
+            marginLeft: (spaceBetween + 'px')
           });
         } else {
           slides.filter(slidesForMargin).css({
-            marginRight: (spaceBetween + "px")
+            marginRight: (spaceBetween + 'px')
           });
         }
       } else {
         slides.filter(slidesForMargin).css({
-          marginBottom: (spaceBetween + "px")
+          marginBottom: (spaceBetween + 'px')
         });
       }
     }
@@ -3364,7 +3364,7 @@
 
     // Update Height
     if (newHeight) {
-      swiper.$wrapperEl.css('height', (newHeight + "px"));
+      swiper.$wrapperEl.css('height', (newHeight + 'px'));
     }
   }
 
@@ -3481,11 +3481,11 @@
     var realIndex = swiper.realIndex;
     var isVirtual = swiper.virtual && params.virtual.enabled;
 
-    slides.removeClass(((params.slideActiveClass) + " " + (params.slideNextClass) + " " + (params.slidePrevClass) + " " + (params.slideDuplicateActiveClass) + " " + (params.slideDuplicateNextClass) + " " + (params.slideDuplicatePrevClass)));
+    slides.removeClass(((params.slideActiveClass) + ' ' + (params.slideNextClass) + ' ' + (params.slidePrevClass) + ' ' + (params.slideDuplicateActiveClass) + ' ' + (params.slideDuplicateNextClass) + ' ' + (params.slideDuplicatePrevClass)));
 
     var activeSlide;
     if (isVirtual) {
-      activeSlide = swiper.$wrapperEl.find(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + activeIndex + "\"]"));
+      activeSlide = swiper.$wrapperEl.find(('.' + (params.slideClass) + '[data-swiper-slide-index=\'' + activeIndex + '\']'));
     } else {
       activeSlide = slides.eq(activeIndex);
     }
@@ -3497,22 +3497,22 @@
       // Duplicate to all looped slides
       if (activeSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + realIndex + "\"]"))
+          .children(('.' + (params.slideClass) + ':not(.' + (params.slideDuplicateClass) + ')[data-swiper-slide-index=\'' + realIndex + '\']'))
           .addClass(params.slideDuplicateActiveClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]"))
+          .children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass) + '[data-swiper-slide-index=\'' + realIndex + '\']'))
           .addClass(params.slideDuplicateActiveClass);
       }
     }
     // Next Slide
-    var nextSlide = activeSlide.nextAll(("." + (params.slideClass))).eq(0).addClass(params.slideNextClass);
+    var nextSlide = activeSlide.nextAll(('.' + (params.slideClass))).eq(0).addClass(params.slideNextClass);
     if (params.loop && nextSlide.length === 0) {
       nextSlide = slides.eq(0);
       nextSlide.addClass(params.slideNextClass);
     }
     // Prev Slide
-    var prevSlide = activeSlide.prevAll(("." + (params.slideClass))).eq(0).addClass(params.slidePrevClass);
+    var prevSlide = activeSlide.prevAll(('.' + (params.slideClass))).eq(0).addClass(params.slidePrevClass);
     if (params.loop && prevSlide.length === 0) {
       prevSlide = slides.eq(-1);
       prevSlide.addClass(params.slidePrevClass);
@@ -3521,20 +3521,20 @@
       // Duplicate to all looped slides
       if (nextSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + (nextSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children(('.' + (params.slideClass) + ':not(.' + (params.slideDuplicateClass) + ')[data-swiper-slide-index=\'' + (nextSlide.attr('data-swiper-slide-index')) + '\']'))
           .addClass(params.slideDuplicateNextClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + (nextSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass) + '[data-swiper-slide-index=\'' + (nextSlide.attr('data-swiper-slide-index')) + '\']'))
           .addClass(params.slideDuplicateNextClass);
       }
       if (prevSlide.hasClass(params.slideDuplicateClass)) {
         $wrapperEl
-          .children(("." + (params.slideClass) + ":not(." + (params.slideDuplicateClass) + ")[data-swiper-slide-index=\"" + (prevSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children(('.' + (params.slideClass) + ':not(.' + (params.slideDuplicateClass) + ')[data-swiper-slide-index=\'' + (prevSlide.attr('data-swiper-slide-index')) + '\']'))
           .addClass(params.slideDuplicatePrevClass);
       } else {
         $wrapperEl
-          .children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + (prevSlide.attr('data-swiper-slide-index')) + "\"]"))
+          .children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass) + '[data-swiper-slide-index=\'' + (prevSlide.attr('data-swiper-slide-index')) + '\']'))
           .addClass(params.slideDuplicatePrevClass);
       }
     }
@@ -3609,7 +3609,7 @@
   function updateClickedSlide(e) {
     var swiper = this;
     var params = swiper.params;
-    var slide = $(e.target).closest(("." + (params.slideClass)))[0];
+    var slide = $(e.target).closest(('.' + (params.slideClass)))[0];
     var slideFound = false;
     if (slide) {
       for (var i = 0; i < swiper.slides.length; i += 1) {
@@ -3698,7 +3698,7 @@
     if (params.cssMode) {
       wrapperEl[swiper.isHorizontal() ? 'scrollLeft' : 'scrollTop'] = swiper.isHorizontal() ? -x : -y;
     } else if (!params.virtualTranslate) {
-      $wrapperEl.transform(("translate3d(" + x + "px, " + y + "px, " + z + "px)"));
+      $wrapperEl.transform(('translate3d(' + x + 'px, ' + y + 'px, ' + z + 'px)'));
     }
     swiper.previousTranslate = swiper.translate;
     swiper.translate = swiper.isHorizontal() ? x : y;
@@ -4071,7 +4071,7 @@
     return swiper.slideTo(newIndex, speed, runCallbacks, internal);
   }
 
-  /* eslint no-unused-vars: "off" */
+  /* eslint no-unused-vars: 'off' */
   function slideNext(speed, runCallbacks, internal) {
     if (speed === void 0) speed = this.params.speed;
     if (runCallbacks === void 0) runCallbacks = true;
@@ -4091,7 +4091,7 @@
     return swiper.slideTo(swiper.activeIndex + increment, speed, runCallbacks, internal);
   }
 
-  /* eslint no-unused-vars: "off" */
+  /* eslint no-unused-vars: 'off' */
   function slidePrev(speed, runCallbacks, internal) {
     if (speed === void 0) speed = this.params.speed;
     if (runCallbacks === void 0) runCallbacks = true;
@@ -4146,7 +4146,7 @@
     return swiper.slideTo(prevIndex, speed, runCallbacks, internal);
   }
 
-  /* eslint no-unused-vars: "off" */
+  /* eslint no-unused-vars: 'off' */
   function slideReset(speed, runCallbacks, internal) {
     if (speed === void 0) speed = this.params.speed;
     if (runCallbacks === void 0) runCallbacks = true;
@@ -4155,7 +4155,7 @@
     return swiper.slideTo(swiper.activeIndex, speed, runCallbacks, internal);
   }
 
-  /* eslint no-unused-vars: "off" */
+  /* eslint no-unused-vars: 'off' */
   function slideToClosest(speed, runCallbacks, internal, threshold) {
     if (speed === void 0) speed = this.params.speed;
     if (runCallbacks === void 0) runCallbacks = true;
@@ -4211,7 +4211,7 @@
         ) {
           swiper.loopFix();
           slideToIndex = $wrapperEl
-            .children(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]:not(." + (params.slideDuplicateClass) + ")"))
+            .children(('.' + (params.slideClass) + '[data-swiper-slide-index=\'' + realIndex + '\']:not(.' + (params.slideDuplicateClass) + ')'))
             .eq(0)
             .index();
 
@@ -4224,7 +4224,7 @@
       } else if (slideToIndex > swiper.slides.length - slidesPerView) {
         swiper.loopFix();
         slideToIndex = $wrapperEl
-          .children(("." + (params.slideClass) + "[data-swiper-slide-index=\"" + realIndex + "\"]:not(." + (params.slideDuplicateClass) + ")"))
+          .children(('.' + (params.slideClass) + '[data-swiper-slide-index=\'' + realIndex + '\']:not(.' + (params.slideDuplicateClass) + ')'))
           .eq(0)
           .index();
 
@@ -4254,18 +4254,18 @@
     var params = swiper.params;
     var $wrapperEl = swiper.$wrapperEl;
     // Remove duplicated slides
-    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass))).remove();
+    $wrapperEl.children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass))).remove();
 
-    var slides = $wrapperEl.children(("." + (params.slideClass)));
+    var slides = $wrapperEl.children(('.' + (params.slideClass)));
 
     if (params.loopFillGroupWithBlank) {
       var blankSlidesNum = params.slidesPerGroup - (slides.length % params.slidesPerGroup);
       if (blankSlidesNum !== params.slidesPerGroup) {
         for (var i = 0; i < blankSlidesNum; i += 1) {
-          var blankNode = $(doc.createElement('div')).addClass(((params.slideClass) + " " + (params.slideBlankClass)));
+          var blankNode = $(doc.createElement('div')).addClass(((params.slideClass) + ' ' + (params.slideBlankClass)));
           $wrapperEl.append(blankNode);
         }
-        slides = $wrapperEl.children(("." + (params.slideClass)));
+        slides = $wrapperEl.children(('.' + (params.slideClass)));
       }
     }
 
@@ -4346,7 +4346,7 @@
     var $wrapperEl = swiper.$wrapperEl;
     var params = swiper.params;
     var slides = swiper.slides;
-    $wrapperEl.children(("." + (params.slideClass) + "." + (params.slideDuplicateClass) + ",." + (params.slideClass) + "." + (params.slideBlankClass))).remove();
+    $wrapperEl.children(('.' + (params.slideClass) + '.' + (params.slideDuplicateClass) + ',.' + (params.slideClass) + '.' + (params.slideBlankClass))).remove();
     slides.removeAttr('data-swiper-slide-index');
   }
 
@@ -4443,7 +4443,7 @@
     if (params.loop) {
       activeIndexBuffer -= swiper.loopedSlides;
       swiper.loopDestroy();
-      swiper.slides = $wrapperEl.children(("." + (params.slideClass)));
+      swiper.slides = $wrapperEl.children(('.' + (params.slideClass)));
     }
     var baseLength = swiper.slides.length;
     if (index <= 0) {
@@ -4501,7 +4501,7 @@
     if (params.loop) {
       activeIndexBuffer -= swiper.loopedSlides;
       swiper.loopDestroy();
-      swiper.slides = $wrapperEl.children(("." + (params.slideClass)));
+      swiper.slides = $wrapperEl.children(('.' + (params.slideClass)));
     }
     var newActiveIndex = activeIndexBuffer;
     var indexToRemove;
@@ -4706,7 +4706,7 @@
     if (data.isTouched && data.isMoved) {
       return;
     }
-    if (params.noSwiping && $targetEl.closest(params.noSwipingSelector ? params.noSwipingSelector : ("." + (params.noSwipingClass)))[0]) {
+    if (params.noSwiping && $targetEl.closest(params.noSwipingSelector ? params.noSwipingSelector : ('.' + (params.noSwipingClass)))[0]) {
       swiper.allowClick = true;
       return;
     }
@@ -5554,11 +5554,11 @@
       var wasMultiRow = params.slidesPerColumn > 1;
       var isMultiRow = breakpointParams.slidesPerColumn > 1;
       if (wasMultiRow && !isMultiRow) {
-        $el.removeClass(((params.containerModifierClass) + "multirow " + (params.containerModifierClass) + "multirow-column"));
+        $el.removeClass(((params.containerModifierClass) + 'multirow ' + (params.containerModifierClass) + 'multirow-column'));
       } else if (!wasMultiRow && isMultiRow) {
-        $el.addClass(((params.containerModifierClass) + "multirow"));
+        $el.addClass(((params.containerModifierClass) + 'multirow'));
         if (breakpointParams.slidesPerColumnFill === 'column') {
-          $el.addClass(((params.containerModifierClass) + "multirow-column"));
+          $el.addClass(((params.containerModifierClass) + 'multirow-column'));
         }
       }
 
@@ -5919,7 +5919,7 @@
     runCallbacksOnInit: true,
   };
 
-  /* eslint no-param-reassign: "off" */
+  /* eslint no-param-reassign: 'off' */
 
   var prototypes = {
     update: update,
@@ -6043,13 +6043,13 @@
       // Find Wrapper
       var $wrapperEl;
       if (el && el.shadowRoot && el.shadowRoot.querySelector) {
-        $wrapperEl = $(el.shadowRoot.querySelector(("." + (swiper.params.wrapperClass))));
+        $wrapperEl = $(el.shadowRoot.querySelector(('.' + (swiper.params.wrapperClass))));
         // Children needs to return slot items
         $wrapperEl.children = function (options) {
           return $el.children(options);
         };
       } else {
-        $wrapperEl = $el.children(("." + (swiper.params.wrapperClass)));
+        $wrapperEl = $el.children(('.' + (swiper.params.wrapperClass)));
       }
       // Extend Swiper
       Utils.extend(swiper, {
@@ -6288,8 +6288,8 @@
       }
 
       swiper.$el
-        .removeClass(("" + (swiper.params.containerModifierClass) + currentDirection))
-        .addClass(("" + (swiper.params.containerModifierClass) + newDirection));
+        .removeClass(('' + (swiper.params.containerModifierClass) + currentDirection))
+        .addClass(('' + (swiper.params.containerModifierClass) + newDirection));
 
       swiper.params.direction = newDirection;
 
@@ -6687,7 +6687,7 @@
 
       if (previousFrom === from && previousTo === to && !force) {
         if (swiper.slidesGrid !== previousSlidesGrid && offset !== previousOffset) {
-          swiper.slides.css(offsetProp, (offset + "px"));
+          swiper.slides.css(offsetProp, (offset + 'px'));
         }
         swiper.updateProgress();
         return;
@@ -6711,11 +6711,11 @@
       var prependIndexes = [];
       var appendIndexes = [];
       if (force) {
-        swiper.$wrapperEl.find(("." + (swiper.params.slideClass))).remove();
+        swiper.$wrapperEl.find(('.' + (swiper.params.slideClass))).remove();
       } else {
         for (var i = previousFrom; i <= previousTo; i += 1) {
           if (i < from || i > to) {
-            swiper.$wrapperEl.find(("." + (swiper.params.slideClass) + "[data-swiper-slide-index=\"" + i + "\"]")).remove();
+            swiper.$wrapperEl.find(('.' + (swiper.params.slideClass) + '[data-swiper-slide-index=\'' + i + '\']')).remove();
           }
         }
       }
@@ -6741,7 +6741,7 @@
       }).forEach(function (index) {
         swiper.$wrapperEl.prepend(renderSlide(slides[index], index));
       });
-      swiper.$wrapperEl.children('.swiper-slide').css(offsetProp, (offset + "px"));
+      swiper.$wrapperEl.children('.swiper-slide').css(offsetProp, (offset + 'px'));
       onRendered();
     },
     renderSlide: function renderSlide(slide, index) {
@@ -6752,7 +6752,7 @@
       }
       var $slideEl = params.renderSlide ?
         $(params.renderSlide.call(swiper, slide, index)) :
-        $(("<div class=\"" + (swiper.params.slideClass) + "\" data-swiper-slide-index=\"" + index + "\">" + slide + "</div>"));
+        $(('<div class=\'' + (swiper.params.slideClass) + '\' data-swiper-slide-index=\'' + index + '\'>' + slide + '</div>'));
       if (!$slideEl.attr('data-swiper-slide-index')) {
         $slideEl.attr('data-swiper-slide-index', index);
       }
@@ -6882,7 +6882,7 @@
         if (!swiper.params.virtual.enabled) {
           return;
         }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "virtual"));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + 'virtual'));
         var overwriteParams = {
           watchSlidesProgress: true,
         };
@@ -6928,7 +6928,7 @@
       if (swiper.params.keyboard.onlyInViewport && (kc === 33 || kc === 34 || kc === 37 || kc === 39 || kc === 38 || kc === 40)) {
         var inView = false;
         // Check that swiper should be inside of visible area of window
-        if (swiper.$el.parents(("." + (swiper.params.slideClass))).length > 0 && swiper.$el.parents(("." + (swiper.params.slideActiveClass))).length === 0) {
+        if (swiper.$el.parents(('.' + (swiper.params.slideClass))).length > 0 && swiper.$el.parents(('.' + (swiper.params.slideActiveClass))).length === 0) {
           return undefined;
         }
         var windowWidth = win.innerWidth;
@@ -7292,9 +7292,9 @@
             // 3. does the earliest event have an (absolute value) delta that's
             //    at least P (P=1?) larger than the most recent event's delta?
             // 4. does the latest event have a delta that's smaller than Q (Q=6?) pixels?
-            // If 1-4 are "yes" then we're near the end of a momuntum scroll deceleration.
+            // If 1-4 are 'yes' then we're near the end of a momuntum scroll deceleration.
             // Snap immediately and ignore remaining wheel events in this scroll.
-            // See comment above for "remaining wheel events in this scroll" determination.
+            // See comment above for 'remaining wheel events in this scroll' determination.
             // If 1-4 aren't satisfied, then wait to snap until 500ms after the last event.
             clearTimeout(swiper.mousewheel.timeout);
             swiper.mousewheel.timeout = undefined;
@@ -7328,7 +7328,7 @@
             }
             if (!swiper.mousewheel.timeout) {
               // if we get here, then we haven't detected the end of a momentum scroll, so
-              // we'll consider a scroll "complete" when there haven't been any wheel events
+              // we'll consider a scroll 'complete' when there haven't been any wheel events
               // for 500ms.
               swiper.mousewheel.timeout = Utils.nextTick(function () {
                 var snapToThreshold = 0.5;
@@ -7730,7 +7730,7 @@
         var midIndex;
         if (params.dynamicBullets) {
           swiper.pagination.bulletSize = bullets.eq(0)[swiper.isHorizontal() ? 'outerWidth' : 'outerHeight'](true);
-          $el.css(swiper.isHorizontal() ? 'width' : 'height', ((swiper.pagination.bulletSize * (params.dynamicMainBullets + 4)) + "px"));
+          $el.css(swiper.isHorizontal() ? 'width' : 'height', ((swiper.pagination.bulletSize * (params.dynamicMainBullets + 4)) + 'px'));
           if (params.dynamicMainBullets > 1 && swiper.previousIndex !== undefined) {
             swiper.pagination.dynamicBulletIndex += (current - swiper.previousIndex);
             if (swiper.pagination.dynamicBulletIndex > (params.dynamicMainBullets - 1)) {
@@ -7743,7 +7743,7 @@
           lastIndex = firstIndex + (Math.min(bullets.length, params.dynamicMainBullets) - 1);
           midIndex = (lastIndex + firstIndex) / 2;
         }
-        bullets.removeClass(((params.bulletActiveClass) + " " + (params.bulletActiveClass) + "-next " + (params.bulletActiveClass) + "-next-next " + (params.bulletActiveClass) + "-prev " + (params.bulletActiveClass) + "-prev-prev " + (params.bulletActiveClass) + "-main"));
+        bullets.removeClass(((params.bulletActiveClass) + ' ' + (params.bulletActiveClass) + '-next ' + (params.bulletActiveClass) + '-next-next ' + (params.bulletActiveClass) + '-prev ' + (params.bulletActiveClass) + '-prev-prev ' + (params.bulletActiveClass) + '-main'));
         if ($el.length > 1) {
           bullets.each(function (index, bullet) {
             var $bullet = $(bullet);
@@ -7753,21 +7753,21 @@
             }
             if (params.dynamicBullets) {
               if (bulletIndex >= firstIndex && bulletIndex <= lastIndex) {
-                $bullet.addClass(((params.bulletActiveClass) + "-main"));
+                $bullet.addClass(((params.bulletActiveClass) + '-main'));
               }
               if (bulletIndex === firstIndex) {
                 $bullet
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev"))
+                  .addClass(((params.bulletActiveClass) + '-prev'))
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                  .addClass(((params.bulletActiveClass) + '-prev-prev'));
               }
               if (bulletIndex === lastIndex) {
                 $bullet
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next"))
+                  .addClass(((params.bulletActiveClass) + '-next'))
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next-next"));
+                  .addClass(((params.bulletActiveClass) + '-next-next'));
               }
             }
           });
@@ -7779,37 +7779,37 @@
             var $firstDisplayedBullet = bullets.eq(firstIndex);
             var $lastDisplayedBullet = bullets.eq(lastIndex);
             for (var i = firstIndex; i <= lastIndex; i += 1) {
-              bullets.eq(i).addClass(((params.bulletActiveClass) + "-main"));
+              bullets.eq(i).addClass(((params.bulletActiveClass) + '-main'));
             }
             if (swiper.params.loop) {
               if (bulletIndex >= bullets.length - params.dynamicMainBullets) {
                 for (var i$1 = params.dynamicMainBullets; i$1 >= 0; i$1 -= 1) {
-                  bullets.eq(bullets.length - i$1).addClass(((params.bulletActiveClass) + "-main"));
+                  bullets.eq(bullets.length - i$1).addClass(((params.bulletActiveClass) + '-main'));
                 }
-                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(((params.bulletActiveClass) + "-prev"));
+                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(((params.bulletActiveClass) + '-prev'));
               } else {
                 $firstDisplayedBullet
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev"))
+                  .addClass(((params.bulletActiveClass) + '-prev'))
                   .prev()
-                  .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                  .addClass(((params.bulletActiveClass) + '-prev-prev'));
                 $lastDisplayedBullet
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next"))
+                  .addClass(((params.bulletActiveClass) + '-next'))
                   .next()
-                  .addClass(((params.bulletActiveClass) + "-next-next"));
+                  .addClass(((params.bulletActiveClass) + '-next-next'));
               }
             } else {
               $firstDisplayedBullet
                 .prev()
-                .addClass(((params.bulletActiveClass) + "-prev"))
+                .addClass(((params.bulletActiveClass) + '-prev'))
                 .prev()
-                .addClass(((params.bulletActiveClass) + "-prev-prev"));
+                .addClass(((params.bulletActiveClass) + '-prev-prev'));
               $lastDisplayedBullet
                 .next()
-                .addClass(((params.bulletActiveClass) + "-next"))
+                .addClass(((params.bulletActiveClass) + '-next'))
                 .next()
-                .addClass(((params.bulletActiveClass) + "-next-next"));
+                .addClass(((params.bulletActiveClass) + '-next-next'));
             }
           }
         }
@@ -7817,12 +7817,12 @@
           var dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
           var bulletsOffset = (((swiper.pagination.bulletSize * dynamicBulletsLength) - (swiper.pagination.bulletSize)) / 2) - (midIndex * swiper.pagination.bulletSize);
           var offsetProp = rtl ? 'right' : 'left';
-          bullets.css(swiper.isHorizontal() ? offsetProp : 'top', (bulletsOffset + "px"));
+          bullets.css(swiper.isHorizontal() ? offsetProp : 'top', (bulletsOffset + 'px'));
         }
       }
       if (params.type === 'fraction') {
-        $el.find(("." + (params.currentClass))).text(params.formatFractionCurrent(current + 1));
-        $el.find(("." + (params.totalClass))).text(params.formatFractionTotal(total));
+        $el.find(('.' + (params.currentClass))).text(params.formatFractionCurrent(current + 1));
+        $el.find(('.' + (params.totalClass))).text(params.formatFractionTotal(total));
       }
       if (params.type === 'progressbar') {
         var progressbarDirection;
@@ -7839,7 +7839,7 @@
         } else {
           scaleY = scale;
         }
-        $el.find(("." + (params.progressbarFillClass))).transform(("translate3d(0,0,0) scaleX(" + scaleX + ") scaleY(" + scaleY + ")")).transition(swiper.params.speed);
+        $el.find(('.' + (params.progressbarFillClass))).transform(('translate3d(0,0,0) scaleX(' + scaleX + ') scaleY(' + scaleY + ')')).transition(swiper.params.speed);
       }
       if (params.type === 'custom' && params.renderCustom) {
         $el.html(params.renderCustom(swiper, current + 1, total));
@@ -7866,19 +7866,19 @@
           if (params.renderBullet) {
             paginationHTML += params.renderBullet.call(swiper, i, params.bulletClass);
           } else {
-            paginationHTML += "<" + (params.bulletElement) + " class=\"" + (params.bulletClass) + "\"></" + (params.bulletElement) + ">";
+            paginationHTML += '<' + (params.bulletElement) + ' class=\'' + (params.bulletClass) + '\'></' + (params.bulletElement) + '>';
           }
         }
         $el.html(paginationHTML);
-        swiper.pagination.bullets = $el.find(("." + (params.bulletClass)));
+        swiper.pagination.bullets = $el.find(('.' + (params.bulletClass)));
       }
       if (params.type === 'fraction') {
         if (params.renderFraction) {
           paginationHTML = params.renderFraction.call(swiper, params.currentClass, params.totalClass);
         } else {
-          paginationHTML = "<span class=\"" + (params.currentClass) + "\"></span>" +
+          paginationHTML = '<span class=\'' + (params.currentClass) + '\'></span>' +
             ' / ' +
-            "<span class=\"" + (params.totalClass) + "\"></span>";
+            '<span class=\'' + (params.totalClass) + '\'></span>';
         }
         $el.html(paginationHTML);
       }
@@ -7886,7 +7886,7 @@
         if (params.renderProgressbar) {
           paginationHTML = params.renderProgressbar.call(swiper, params.progressbarFillClass);
         } else {
-          paginationHTML = "<span class=\"" + (params.progressbarFillClass) + "\"></span>";
+          paginationHTML = '<span class=\'' + (params.progressbarFillClass) + '\'></span>';
         }
         $el.html(paginationHTML);
       }
@@ -7922,7 +7922,7 @@
       $el.addClass(params.modifierClass + params.type);
 
       if (params.type === 'bullets' && params.dynamicBullets) {
-        $el.addClass(("" + (params.modifierClass) + (params.type) + "-dynamic"));
+        $el.addClass(('' + (params.modifierClass) + (params.type) + '-dynamic'));
         swiper.pagination.dynamicBulletIndex = 0;
         if (params.dynamicMainBullets < 1) {
           params.dynamicMainBullets = 1;
@@ -7933,7 +7933,7 @@
       }
 
       if (params.clickable) {
-        $el.on('click', ("." + (params.bulletClass)), function onClick(e) {
+        $el.on('click', ('.' + (params.bulletClass)), function onClick(e) {
           e.preventDefault();
           var index = $(this).index() * swiper.params.slidesPerGroup;
           if (swiper.params.loop) {
@@ -7962,7 +7962,7 @@
         swiper.pagination.bullets.removeClass(params.bulletActiveClass);
       }
       if (params.clickable) {
-        $el.off('click', ("." + (params.bulletClass)));
+        $el.off('click', ('.' + (params.bulletClass)));
       }
     },
   };
@@ -8104,11 +8104,11 @@
         newSize = trackSize - newPos;
       }
       if (swiper.isHorizontal()) {
-        $dragEl.transform(("translate3d(" + newPos + "px, 0, 0)"));
-        $dragEl[0].style.width = newSize + "px";
+        $dragEl.transform(('translate3d(' + newPos + 'px, 0, 0)'));
+        $dragEl[0].style.width = newSize + 'px';
       } else {
-        $dragEl.transform(("translate3d(0px, " + newPos + "px, 0)"));
-        $dragEl[0].style.height = newSize + "px";
+        $dragEl.transform(('translate3d(0px, ' + newPos + 'px, 0)'));
+        $dragEl[0].style.height = newSize + 'px';
       }
       if (params.hide) {
         clearTimeout(swiper.scrollbar.timeout);
@@ -8150,9 +8150,9 @@
       }
 
       if (swiper.isHorizontal()) {
-        $dragEl[0].style.width = dragSize + "px";
+        $dragEl[0].style.width = dragSize + 'px';
       } else {
-        $dragEl[0].style.height = dragSize + "px";
+        $dragEl[0].style.height = dragSize + 'px';
       }
 
       if (divider >= 1) {
@@ -8351,9 +8351,9 @@
         $el = $swiperEl.find(params.el);
       }
 
-      var $dragEl = $el.find(("." + (swiper.params.scrollbar.dragClass)));
+      var $dragEl = $el.find(('.' + (swiper.params.scrollbar.dragClass)));
       if ($dragEl.length === 0) {
-        $dragEl = $(("<div class=\"" + (swiper.params.scrollbar.dragClass) + "\"></div>"));
+        $dragEl = $(('<div class=\'' + (swiper.params.scrollbar.dragClass) + '\'></div>'));
         $el.append($dragEl);
       }
 
@@ -8469,14 +8469,14 @@
       }
 
       if ((x).indexOf('%') >= 0) {
-        x = (parseInt(x, 10) * progress * rtlFactor) + "%";
+        x = (parseInt(x, 10) * progress * rtlFactor) + '%';
       } else {
-        x = (x * progress * rtlFactor) + "px";
+        x = (x * progress * rtlFactor) + 'px';
       }
       if ((y).indexOf('%') >= 0) {
-        y = (parseInt(y, 10) * progress) + "%";
+        y = (parseInt(y, 10) * progress) + '%';
       } else {
-        y = (y * progress) + "px";
+        y = (y * progress) + 'px';
       }
 
       if (typeof opacity !== 'undefined' && opacity !== null) {
@@ -8484,10 +8484,10 @@
         $el[0].style.opacity = currentOpacity;
       }
       if (typeof scale === 'undefined' || scale === null) {
-        $el.transform(("translate3d(" + x + ", " + y + ", 0px)"));
+        $el.transform(('translate3d(' + x + ', ' + y + ', 0px)'));
       } else {
         var currentScale = scale - ((scale - 1) * (1 - Math.abs(progress)));
-        $el.transform(("translate3d(" + x + ", " + y + ", 0px) scale(" + currentScale + ")"));
+        $el.transform(('translate3d(' + x + ', ' + y + ', 0px) scale(' + currentScale + ')'));
       }
     },
     setTranslate: function setTranslate() {
@@ -8608,12 +8608,12 @@
         gesture.scaleStart = Zoom.getDistanceBetweenTouches(e);
       }
       if (!gesture.$slideEl || !gesture.$slideEl.length) {
-        gesture.$slideEl = $(e.target).closest(("." + (swiper.params.slideClass)));
+        gesture.$slideEl = $(e.target).closest(('.' + (swiper.params.slideClass)));
         if (gesture.$slideEl.length === 0) {
           gesture.$slideEl = swiper.slides.eq(swiper.activeIndex);
         }
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent(('.' + (params.containerClass)));
         gesture.maxRatio = gesture.$imageWrapEl.attr('data-swiper-zoom') || params.maxRatio;
         if (gesture.$imageWrapEl.length === 0) {
           gesture.$imageEl = undefined;
@@ -8649,7 +8649,7 @@
       if (zoom.scale < params.minRatio) {
         zoom.scale = (params.minRatio + 1) - (Math.pow(((params.minRatio - zoom.scale) + 1), 0.5));
       }
-      gesture.$imageEl.transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageEl.transform(('translate3d(0,0,0) scale(' + (zoom.scale) + ')'));
     },
     onGestureEnd: function onGestureEnd(e) {
       var swiper = this;
@@ -8670,7 +8670,7 @@
         return;
       }
       zoom.scale = Math.max(Math.min(zoom.scale, gesture.maxRatio), params.minRatio);
-      gesture.$imageEl.transition(swiper.params.speed).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageEl.transition(swiper.params.speed).transform(('translate3d(0,0,0) scale(' + (zoom.scale) + ')'));
       zoom.currentScale = zoom.scale;
       zoom.isScaling = false;
       if (zoom.scale === 1) {
@@ -8803,7 +8803,7 @@
       velocity.prevPositionY = image.touchesCurrent.y;
       velocity.prevTime = Date.now();
 
-      gesture.$imageWrapEl.transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+      gesture.$imageWrapEl.transform(('translate3d(' + (image.currentX) + 'px, ' + (image.currentY) + 'px,0)'));
     },
     onTouchEnd: function onTouchEnd() {
       var swiper = this;
@@ -8850,7 +8850,7 @@
       image.currentX = Math.max(Math.min(image.currentX, image.maxX), image.minX);
       image.currentY = Math.max(Math.min(image.currentY, image.maxY), image.minY);
 
-      gesture.$imageWrapEl.transition(momentumDuration).transform(("translate3d(" + (image.currentX) + "px, " + (image.currentY) + "px,0)"));
+      gesture.$imageWrapEl.transition(momentumDuration).transform(('translate3d(' + (image.currentX) + 'px, ' + (image.currentY) + 'px,0)'));
     },
     onTransitionEnd: function onTransitionEnd() {
       var swiper = this;
@@ -8892,13 +8892,13 @@
       if (!gesture.$slideEl) {
         gesture.$slideEl = swiper.slides.eq(swiper.activeIndex);
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent(('.' + (params.containerClass)));
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) {
         return;
       }
 
-      gesture.$slideEl.addClass(("" + (params.zoomedSlideClass)));
+      gesture.$slideEl.addClass(('' + (params.zoomedSlideClass)));
 
       var touchX;
       var touchY;
@@ -8967,8 +8967,8 @@
         translateX = 0;
         translateY = 0;
       }
-      gesture.$imageWrapEl.transition(300).transform(("translate3d(" + translateX + "px, " + translateY + "px,0)"));
-      gesture.$imageEl.transition(300).transform(("translate3d(0,0,0) scale(" + (zoom.scale) + ")"));
+      gesture.$imageWrapEl.transition(300).transform(('translate3d(' + translateX + 'px, ' + translateY + 'px,0)'));
+      gesture.$imageEl.transition(300).transform(('translate3d(0,0,0) scale(' + (zoom.scale) + ')'));
     },
     out: function out() {
       var swiper = this;
@@ -8980,7 +8980,7 @@
       if (!gesture.$slideEl) {
         gesture.$slideEl = swiper.slides.eq(swiper.activeIndex);
         gesture.$imageEl = gesture.$slideEl.find('img, svg, canvas, picture, .swiper-zoom-target');
-        gesture.$imageWrapEl = gesture.$imageEl.parent(("." + (params.containerClass)));
+        gesture.$imageWrapEl = gesture.$imageEl.parent(('.' + (params.containerClass)));
       }
       if (!gesture.$imageEl || gesture.$imageEl.length === 0) {
         return;
@@ -8990,7 +8990,7 @@
       zoom.currentScale = 1;
       gesture.$imageWrapEl.transition(300).transform('translate3d(0,0,0)');
       gesture.$imageEl.transition(300).transform('translate3d(0,0,0) scale(1)');
-      gesture.$slideEl.removeClass(("" + (params.zoomedSlideClass)));
+      gesture.$slideEl.removeClass(('' + (params.zoomedSlideClass)));
       gesture.$slideEl = undefined;
     },
     // Attach/Detach Events
@@ -9011,7 +9011,7 @@
         capture: true
       } : true;
 
-      var slideSelector = "." + (swiper.params.slideClass);
+      var slideSelector = '.' + (swiper.params.slideClass);
 
       // Scale image
       if (Support.gestures) {
@@ -9028,7 +9028,7 @@
       }
 
       // Move image
-      swiper.$wrapperEl.on(swiper.touchEvents.move, ("." + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
+      swiper.$wrapperEl.on(swiper.touchEvents.move, ('.' + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
     },
     disable: function disable() {
       var swiper = this;
@@ -9048,7 +9048,7 @@
         capture: true
       } : true;
 
-      var slideSelector = "." + (swiper.params.slideClass);
+      var slideSelector = '.' + (swiper.params.slideClass);
 
       // Scale image
       if (Support.gestures) {
@@ -9065,7 +9065,7 @@
       }
 
       // Move image
-      swiper.$wrapperEl.off(swiper.touchEvents.move, ("." + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
+      swiper.$wrapperEl.off(swiper.touchEvents.move, ('.' + (swiper.params.zoom.containerClass)), zoom.onTouchMove, activeListenerWithCapture);
     },
   };
 
@@ -9204,10 +9204,10 @@
       var isVirtual = swiper.virtual && swiper.params.virtual.enabled;
 
       var $slideEl = isVirtual ?
-        swiper.$wrapperEl.children(("." + (swiper.params.slideClass) + "[data-swiper-slide-index=\"" + index + "\"]")) :
+        swiper.$wrapperEl.children(('.' + (swiper.params.slideClass) + '[data-swiper-slide-index=\'' + index + '\']')) :
         swiper.slides.eq(index);
 
-      var $images = $slideEl.find(("." + (params.elementClass) + ":not(." + (params.loadedClass) + "):not(." + (params.loadingClass) + ")"));
+      var $images = $slideEl.find(('.' + (params.elementClass) + ':not(.' + (params.loadedClass) + '):not(.' + (params.loadingClass) + ')'));
       if ($slideEl.hasClass(params.elementClass) && !$slideEl.hasClass(params.loadedClass) && !$slideEl.hasClass(params.loadingClass)) {
         $images = $images.add($slideEl[0]);
       }
@@ -9229,7 +9229,7 @@
             return;
           }
           if (background) {
-            $imageEl.css('background-image', ("url(\"" + background + "\")"));
+            $imageEl.css('background-image', ('url(\'' + background + '\')'));
             $imageEl.removeAttr('data-background');
           } else {
             if (srcset) {
@@ -9247,14 +9247,14 @@
           }
 
           $imageEl.addClass(params.loadedClass).removeClass(params.loadingClass);
-          $slideEl.find(("." + (params.preloaderClass))).remove();
+          $slideEl.find(('.' + (params.preloaderClass))).remove();
           if (swiper.params.loop && loadInDuplicate) {
             var slideOriginalIndex = $slideEl.attr('data-swiper-slide-index');
             if ($slideEl.hasClass(swiper.params.slideDuplicateClass)) {
-              var originalSlide = swiper.$wrapperEl.children(("[data-swiper-slide-index=\"" + slideOriginalIndex + "\"]:not(." + (swiper.params.slideDuplicateClass) + ")"));
+              var originalSlide = swiper.$wrapperEl.children(('[data-swiper-slide-index=\'' + slideOriginalIndex + '\']:not(.' + (swiper.params.slideDuplicateClass) + ')'));
               swiper.lazy.loadInSlide(originalSlide.index(), false);
             } else {
-              var duplicatedSlide = swiper.$wrapperEl.children(("." + (swiper.params.slideDuplicateClass) + "[data-swiper-slide-index=\"" + slideOriginalIndex + "\"]"));
+              var duplicatedSlide = swiper.$wrapperEl.children(('.' + (swiper.params.slideDuplicateClass) + '[data-swiper-slide-index=\'' + slideOriginalIndex + '\']'));
               swiper.lazy.loadInSlide(duplicatedSlide.index(), false);
             }
           }
@@ -9283,7 +9283,7 @@
 
       function slideExist(index) {
         if (isVirtual) {
-          if ($wrapperEl.children(("." + (swiperParams.slideClass) + "[data-swiper-slide-index=\"" + index + "\"]")).length) {
+          if ($wrapperEl.children(('.' + (swiperParams.slideClass) + '[data-swiper-slide-index=\'' + index + '\']')).length) {
             return true;
           }
         } else if (slides[index]) {
@@ -9303,7 +9303,7 @@
         swiper.lazy.initialImageLoaded = true;
       }
       if (swiper.params.watchSlidesVisibility) {
-        $wrapperEl.children(("." + (swiperParams.slideVisibleClass))).each(function (elIndex, slideEl) {
+        $wrapperEl.children(('.' + (swiperParams.slideVisibleClass))).each(function (elIndex, slideEl) {
           var index = isVirtual ? $(slideEl).attr('data-swiper-slide-index') : $(slideEl).index();
           swiper.lazy.loadInSlide(index);
         });
@@ -9335,12 +9335,12 @@
             }
           }
         } else {
-          var nextSlide = $wrapperEl.children(("." + (swiperParams.slideNextClass)));
+          var nextSlide = $wrapperEl.children(('.' + (swiperParams.slideNextClass)));
           if (nextSlide.length > 0) {
             swiper.lazy.loadInSlide(slideIndex(nextSlide));
           }
 
-          var prevSlide = $wrapperEl.children(("." + (swiperParams.slidePrevClass)));
+          var prevSlide = $wrapperEl.children(('.' + (swiperParams.slidePrevClass)));
           if (prevSlide.length > 0) {
             swiper.lazy.loadInSlide(slideIndex(prevSlide));
           }
@@ -9428,7 +9428,7 @@
     },
   };
 
-  /* eslint no-bitwise: ["error", { "allow": [">>"] }] */
+  /* eslint no-bitwise: ['error', { 'allow': ['>>'] }] */
 
   var Controller = {
     LinearSpline: function LinearSpline(x, y) {
@@ -9677,7 +9677,7 @@
           swiper.a11y.notify(params.prevSlideMessage);
         }
       }
-      if (swiper.pagination && $targetEl.is(("." + (swiper.params.pagination.bulletClass)))) {
+      if (swiper.pagination && $targetEl.is(('.' + (swiper.params.pagination.bulletClass)))) {
         $targetEl[0].click();
       }
     },
@@ -9757,7 +9757,7 @@
 
       // Pagination
       if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-        swiper.pagination.$el.on('keydown', ("." + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
+        swiper.pagination.$el.on('keydown', ('.' + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
       }
     },
     destroy: function destroy() {
@@ -9783,7 +9783,7 @@
 
       // Pagination
       if (swiper.pagination && swiper.params.pagination.clickable && swiper.pagination.bullets && swiper.pagination.bullets.length) {
-        swiper.pagination.$el.off('keydown', ("." + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
+        swiper.pagination.$el.off('keydown', ('.' + (swiper.params.pagination.bulletClass)), swiper.a11y.onEnterKey);
       }
     },
   };
@@ -9804,7 +9804,7 @@
       var swiper = this;
       Utils.extend(swiper, {
         a11y: {
-          liveRegion: $(("<span class=\"" + (swiper.params.a11y.notificationClass) + "\" aria-live=\"assertive\" aria-atomic=\"true\"></span>")),
+          liveRegion: $(('<span class=\'' + (swiper.params.a11y.notificationClass) + '\' aria-live=\'assertive\' aria-atomic=\'true\'></span>')),
         },
       });
       Object.keys(a11y).forEach(function (methodName) {
@@ -9904,7 +9904,7 @@
       var slide = swiper.slides.eq(index);
       var value = History.slugify(slide.attr('data-history'));
       if (!win.location.pathname.includes(key)) {
-        value = key + "/" + value;
+        value = key + '/' + value;
       }
       var currentState = win.history.state;
       if (currentState && currentState.value === value) {
@@ -10000,7 +10000,7 @@
       var newHash = doc.location.hash.replace('#', '');
       var activeSlideHash = swiper.slides.eq(swiper.activeIndex).attr('data-hash');
       if (newHash !== activeSlideHash) {
-        var newIndex = swiper.$wrapperEl.children(("." + (swiper.params.slideClass) + "[data-hash=\"" + newHash + "\"]")).index();
+        var newIndex = swiper.$wrapperEl.children(('.' + (swiper.params.slideClass) + '[data-hash=\'' + newHash + '\']')).index();
         if (typeof newIndex === 'undefined') {
           return;
         }
@@ -10013,7 +10013,7 @@
         return;
       }
       if (swiper.params.hashNavigation.replaceState && win.history && win.history.replaceState) {
-        win.history.replaceState(null, null, (("#" + (swiper.slides.eq(swiper.activeIndex).attr('data-hash'))) || ''));
+        win.history.replaceState(null, null, (('#' + (swiper.slides.eq(swiper.activeIndex).attr('data-hash'))) || ''));
       } else {
         var slide = swiper.slides.eq(swiper.activeIndex);
         var hash = slide.attr('data-hash') || slide.attr('data-history');
@@ -10098,7 +10098,7 @@
     },
   };
 
-  /* eslint no-underscore-dangle: "off" */
+  /* eslint no-underscore-dangle: 'off' */
 
   var Autoplay = {
     run: function run() {
@@ -10311,7 +10311,7 @@
           .css({
             opacity: slideOpacity,
           })
-          .transform(("translate3d(" + tx + "px, " + ty + "px, 0px)"));
+          .transform(('translate3d(' + tx + 'px, ' + ty + 'px, 0px)'));
       }
     },
     setTransition: function setTransition(duration) {
@@ -10361,7 +10361,7 @@
         if (swiper.params.effect !== 'fade') {
           return;
         }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "fade"));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + 'fade'));
         var overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
@@ -10413,7 +10413,7 @@
             $wrapperEl.append($cubeShadowEl);
           }
           $cubeShadowEl.css({
-            height: (swiperWidth + "px")
+            height: (swiperWidth + 'px')
           });
         } else {
           $cubeShadowEl = $el.find('.swiper-cube-shadow');
@@ -10461,7 +10461,7 @@
           tx = 0;
         }
 
-        var transform = "rotateX(" + (isHorizontal ? 0 : -slideAngle) + "deg) rotateY(" + (isHorizontal ? slideAngle : 0) + "deg) translate3d(" + tx + "px, " + ty + "px, " + tz + "px)";
+        var transform = 'rotateX(' + (isHorizontal ? 0 : -slideAngle) + 'deg) rotateY(' + (isHorizontal ? slideAngle : 0) + 'deg) translate3d(' + tx + 'px, ' + ty + 'px, ' + tz + 'px)';
         if (progress <= 1 && progress > -1) {
           wrapperRotate = (slideIndex * 90) + (progress * 90);
           if (rtl) {
@@ -10474,11 +10474,11 @@
           var shadowBefore = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
           var shadowAfter = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if (shadowBefore.length === 0) {
-            shadowBefore = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'left' : 'top') + "\"></div>"));
+            shadowBefore = $(('<div class=\'swiper-slide-shadow-' + (isHorizontal ? 'left' : 'top') + '\'></div>'));
             $slideEl.append(shadowBefore);
           }
           if (shadowAfter.length === 0) {
-            shadowAfter = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'right' : 'bottom') + "\"></div>"));
+            shadowAfter = $(('<div class=\'swiper-slide-shadow-' + (isHorizontal ? 'right' : 'bottom') + '\'></div>'));
             $slideEl.append(shadowAfter);
           }
           if (shadowBefore.length) {
@@ -10490,15 +10490,15 @@
         }
       }
       $wrapperEl.css({
-        '-webkit-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        '-moz-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        '-ms-transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
-        'transform-origin': ("50% 50% -" + (swiperSize / 2) + "px"),
+        '-webkit-transform-origin': ('50% 50% -' + (swiperSize / 2) + 'px'),
+        '-moz-transform-origin': ('50% 50% -' + (swiperSize / 2) + 'px'),
+        '-ms-transform-origin': ('50% 50% -' + (swiperSize / 2) + 'px'),
+        'transform-origin': ('50% 50% -' + (swiperSize / 2) + 'px'),
       });
 
       if (params.shadow) {
         if (isHorizontal) {
-          $cubeShadowEl.transform(("translate3d(0px, " + ((swiperWidth / 2) + params.shadowOffset) + "px, " + (-swiperWidth / 2) + "px) rotateX(90deg) rotateZ(0deg) scale(" + (params.shadowScale) + ")"));
+          $cubeShadowEl.transform(('translate3d(0px, ' + ((swiperWidth / 2) + params.shadowOffset) + 'px, ' + (-swiperWidth / 2) + 'px) rotateX(90deg) rotateZ(0deg) scale(' + (params.shadowScale) + ')'));
         } else {
           var shadowAngle = Math.abs(wrapperRotate) - (Math.floor(Math.abs(wrapperRotate) / 90) * 90);
           var multiplier = 1.5 - (
@@ -10508,12 +10508,12 @@
           var scale1 = params.shadowScale;
           var scale2 = params.shadowScale / multiplier;
           var offset = params.shadowOffset;
-          $cubeShadowEl.transform(("scale3d(" + scale1 + ", 1, " + scale2 + ") translate3d(0px, " + ((swiperHeight / 2) + offset) + "px, " + (-swiperHeight / 2 / scale2) + "px) rotateX(-90deg)"));
+          $cubeShadowEl.transform(('scale3d(' + scale1 + ', 1, ' + scale2 + ') translate3d(0px, ' + ((swiperHeight / 2) + offset) + 'px, ' + (-swiperHeight / 2 / scale2) + 'px) rotateX(-90deg)'));
         }
       }
       var zFactor = (Browser.isSafari || Browser.isUiWebView) ? (-swiperSize / 2) : 0;
       $wrapperEl
-        .transform(("translate3d(0px,0," + zFactor + "px) rotateX(" + (swiper.isHorizontal() ? 0 : wrapperRotate) + "deg) rotateY(" + (swiper.isHorizontal() ? -wrapperRotate : 0) + "deg)"));
+        .transform(('translate3d(0px,0,' + zFactor + 'px) rotateX(' + (swiper.isHorizontal() ? 0 : wrapperRotate) + 'deg) rotateY(' + (swiper.isHorizontal() ? -wrapperRotate : 0) + 'deg)'));
     },
     setTransition: function setTransition(duration) {
       var swiper = this;
@@ -10554,8 +10554,8 @@
         if (swiper.params.effect !== 'cube') {
           return;
         }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "cube"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + 'cube'));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + '3d'));
         var overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
@@ -10619,11 +10619,11 @@
           var shadowBefore = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
           var shadowAfter = swiper.isHorizontal() ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if (shadowBefore.length === 0) {
-            shadowBefore = $(("<div class=\"swiper-slide-shadow-" + (swiper.isHorizontal() ? 'left' : 'top') + "\"></div>"));
+            shadowBefore = $(('<div class=\'swiper-slide-shadow-' + (swiper.isHorizontal() ? 'left' : 'top') + '\'></div>'));
             $slideEl.append(shadowBefore);
           }
           if (shadowAfter.length === 0) {
-            shadowAfter = $(("<div class=\"swiper-slide-shadow-" + (swiper.isHorizontal() ? 'right' : 'bottom') + "\"></div>"));
+            shadowAfter = $(('<div class=\'swiper-slide-shadow-' + (swiper.isHorizontal() ? 'right' : 'bottom') + '\'></div>'));
             $slideEl.append(shadowAfter);
           }
           if (shadowBefore.length) {
@@ -10634,7 +10634,7 @@
           }
         }
         $slideEl
-          .transform(("translate3d(" + tx + "px, " + ty + "px, 0px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)"));
+          .transform(('translate3d(' + tx + 'px, ' + ty + 'px, 0px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)'));
       }
     },
     setTransition: function setTransition(duration) {
@@ -10691,8 +10691,8 @@
         if (swiper.params.effect !== 'flip') {
           return;
         }
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "flip"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + 'flip'));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + '3d'));
         var overwriteParams = {
           slidesPerView: 1,
           slidesPerColumn: 1,
@@ -10772,7 +10772,7 @@
           rotateX = 0;
         }
 
-        var slideTransform = "translate3d(" + translateX + "px," + translateY + "px," + translateZ + "px)  rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)";
+        var slideTransform = 'translate3d(' + translateX + 'px,' + translateY + 'px,' + translateZ + 'px)  rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)';
 
         $slideEl.transform(slideTransform);
         $slideEl[0].style.zIndex = -Math.abs(Math.round(offsetMultiplier)) + 1;
@@ -10781,11 +10781,11 @@
           var $shadowBeforeEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-left') : $slideEl.find('.swiper-slide-shadow-top');
           var $shadowAfterEl = isHorizontal ? $slideEl.find('.swiper-slide-shadow-right') : $slideEl.find('.swiper-slide-shadow-bottom');
           if ($shadowBeforeEl.length === 0) {
-            $shadowBeforeEl = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'left' : 'top') + "\"></div>"));
+            $shadowBeforeEl = $(('<div class=\'swiper-slide-shadow-' + (isHorizontal ? 'left' : 'top') + '\'></div>'));
             $slideEl.append($shadowBeforeEl);
           }
           if ($shadowAfterEl.length === 0) {
-            $shadowAfterEl = $(("<div class=\"swiper-slide-shadow-" + (isHorizontal ? 'right' : 'bottom') + "\"></div>"));
+            $shadowAfterEl = $(('<div class=\'swiper-slide-shadow-' + (isHorizontal ? 'right' : 'bottom') + '\'></div>'));
             $slideEl.append($shadowAfterEl);
           }
           if ($shadowBeforeEl.length) {
@@ -10800,7 +10800,7 @@
       // Set correct perspective for IE10
       if (Support.pointerEvents || Support.prefixedPointerEvents) {
         var ws = $wrapperEl[0].style;
-        ws.perspectiveOrigin = center + "px 50%";
+        ws.perspectiveOrigin = center + 'px 50%';
       }
     },
     setTransition: function setTransition(duration) {
@@ -10839,8 +10839,8 @@
           return;
         }
 
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "coverflow"));
-        swiper.classNames.push(((swiper.params.containerModifierClass) + "3d"));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + 'coverflow'));
+        swiper.classNames.push(((swiper.params.containerModifierClass) + '3d'));
 
         swiper.params.watchSlidesProgress = true;
         swiper.originalParams.watchSlidesProgress = true;
@@ -10917,8 +10917,8 @@
           swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
           currentIndex = swiper.activeIndex;
         }
-        var prevIndex = swiper.slides.eq(currentIndex).prevAll(("[data-swiper-slide-index=\"" + slideToIndex + "\"]")).eq(0).index();
-        var nextIndex = swiper.slides.eq(currentIndex).nextAll(("[data-swiper-slide-index=\"" + slideToIndex + "\"]")).eq(0).index();
+        var prevIndex = swiper.slides.eq(currentIndex).prevAll(('[data-swiper-slide-index=\'' + slideToIndex + '\']')).eq(0).index();
+        var nextIndex = swiper.slides.eq(currentIndex).nextAll(('[data-swiper-slide-index=\'' + slideToIndex + '\']')).eq(0).index();
         if (typeof prevIndex === 'undefined') {
           slideToIndex = nextIndex;
         } else if (typeof nextIndex === 'undefined') {
@@ -10953,8 +10953,8 @@
             currentThumbsIndex = thumbsSwiper.activeIndex;
           }
           // Find actual thumbs index to slide to
-          var prevThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).prevAll(("[data-swiper-slide-index=\"" + (swiper.realIndex) + "\"]")).eq(0).index();
-          var nextThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).nextAll(("[data-swiper-slide-index=\"" + (swiper.realIndex) + "\"]")).eq(0).index();
+          var prevThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).prevAll(('[data-swiper-slide-index=\'' + (swiper.realIndex) + '\']')).eq(0).index();
+          var nextThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).nextAll(('[data-swiper-slide-index=\'' + (swiper.realIndex) + '\']')).eq(0).index();
           if (typeof prevThumbsIndex === 'undefined') {
             newThumbsIndex = nextThumbsIndex;
           } else if (typeof nextThumbsIndex === 'undefined') {
@@ -11000,7 +11000,7 @@
       thumbsSwiper.slides.removeClass(thumbActiveClass);
       if (thumbsSwiper.params.loop || (thumbsSwiper.params.virtual && thumbsSwiper.params.virtual.enabled)) {
         for (var i = 0; i < thumbsToActivate; i += 1) {
-          thumbsSwiper.$wrapperEl.children(("[data-swiper-slide-index=\"" + (swiper.realIndex + i) + "\"]")).addClass(thumbActiveClass);
+          thumbsSwiper.$wrapperEl.children(('[data-swiper-slide-index=\'' + (swiper.realIndex + i) + '\']')).addClass(thumbActiveClass);
         }
       } else {
         for (var i$1 = 0; i$1 < thumbsToActivate; i$1 += 1) {

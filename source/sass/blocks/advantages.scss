@@ -50,7 +50,7 @@
     content: "";
     position: absolute;
     width: 340px;
-    border: 2px solid rgba(209,10,66,0.2);
+    border: 2px solid rgba(209, 10, 66, 0.2);
     top: 50%;
     transform: translate(-50%);
   }
@@ -304,7 +304,7 @@
         background-image: url("../img/icon-5-tablet@1x.png");
         width: 59px;
 
-        @media (min-resolution:1.5dppx) {
+        @media (min-resolution: 1.5dppx) {
           background-image: url("../img/icon-5-tablet@2x.png");
         }
       }
