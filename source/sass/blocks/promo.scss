@@ -5,14 +5,11 @@
   padding-top: 113px;
   padding-bottom: 115px;
 
-  picture {
-    background-color: #003d85;
-    display: flex;
-  }
-
   img {
     min-height: 500px;
     object-fit: cover;
+    background-color: #003d85;
+    display: flex;
   }
 
   @media (max-width: 1199px) {

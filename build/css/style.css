@@ -1329,17 +1329,14 @@ button.swiper-pagination-bullet {
   position: relative;
   top: -112px;
   left: -63px; }
-  .gym__video picture {
-    position: relative; }
-    .gym__video picture::after {
-      content: "";
-      background: rgba(20, 54, 122, 0.5);
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      position: absolute;
-      z-index: 1; }
+  .gym__video::after {
+    content: "";
+    background: rgba(20, 54, 122, 0.5);
+    width: 364px;
+    height: 228px;
+    top: 0;
+    position: absolute;
+    z-index: 1; }
   .gym__video img {
     width: 364px;
     height: 228px; }
@@ -1672,15 +1669,14 @@ button.swiper-pagination-bullet {
           align-items: center;
   padding-top: 113px;
   padding-bottom: 115px; }
-  .promo picture {
+  .promo img {
+    min-height: 500px;
+    -o-object-fit: cover;
+       object-fit: cover;
     background-color: #003d85;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex; }
-  .promo img {
-    min-height: 500px;
-    -o-object-fit: cover;
-       object-fit: cover; }
   @media (max-width: 1199px) {
     .promo {
       min-height: 492px;
@@ -2654,23 +2650,21 @@ button.swiper-pagination-bullet {
           box-shadow: 0 0 40px rgba(28, 51, 116, 0.2);
   padding: 56px 60px;
   height: auto; }
-  .reviews__item picture {
-    margin-top: 7px; }
   .reviews__item img {
     width: 80px;
     height: 80px;
-    border-radius: 50%; }
+    border-radius: 50%;
+    margin-top: 7px; }
   @media (max-width: 767px) {
     .reviews__item {
       padding: 40px 25px;
       padding-bottom: 35px; }
-      .reviews__item picture {
-        margin-top: 0;
-        position: absolute;
-        left: 40px; }
       .reviews__item img {
         width: 68px;
-        height: 68px; } }
+        height: 68px;
+        margin-top: 0;
+        position: absolute;
+        left: 40px; } }
 
 .reviews__comments {
   margin-left: 30px; }
