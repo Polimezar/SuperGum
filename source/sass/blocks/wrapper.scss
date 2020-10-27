@@ -89,9 +89,7 @@
   }
 
   label {
-    &:nth-child(1n) {
-      margin-right: 25px;
-    }
+    margin-right: 25px;
   }
 
   input {
@@ -137,9 +135,7 @@
     }
 
     label {
-      &:nth-child(1n) {
-        margin-right: 60px;
-      }
+      margin-right: 60px;
     }
 
     button {
@@ -170,10 +166,8 @@
     }
 
     label {
-      &:nth-child(1n) {
-        margin-right: 0;
-        margin-bottom: 36px;
-      }
+      margin-right: 0;
+      margin-bottom: 36px;
     }
 
     input {

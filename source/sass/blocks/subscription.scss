@@ -10,6 +10,7 @@
   h2 {
     @include title;
     margin-top: 115px;
+    color: #102654;
   }
 
   @media (max-width: 1199px) {
