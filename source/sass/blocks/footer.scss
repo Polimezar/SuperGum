@@ -42,15 +42,20 @@
 
   @media (max-width: 1199px) {
     svg {
-      width: 83px;
-      height: 13px;
+      width: 82px;
+      height: 18px;
     }
   }
 
   @media (max-width: 767px) {
     position: absolute;
-    top: 5px;
-    left: -14px;
+    top: 0;
+    left: 0;
+
+    svg {
+      width: 68px;
+      height: 15px;
+    }
   }
 }
 

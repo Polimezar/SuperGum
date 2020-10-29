@@ -2790,14 +2790,17 @@ button.swiper-pagination-bullet {
 
 @media (max-width: 1199px) {
   .footer__logo svg {
-    width: 83px;
-    height: 13px; } }
+    width: 82px;
+    height: 18px; } }
 
 @media (max-width: 767px) {
   .footer__logo {
     position: absolute;
-    top: 5px;
-    left: -14px; } }
+    top: 0;
+    left: 0; }
+    .footer__logo svg {
+      width: 68px;
+      height: 15px; } }
 
 .footer__nav {
   display: -webkit-box;
