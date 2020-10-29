@@ -34,14 +34,20 @@ var trainerSlider = new Swiper('.trainers__inner', {
     1200: {
       slidesPerView: 4,
       spaceBetween: 40,
+      infinite: true,
+      slidesPerGroup: 4,
     },
     768: {
       slidesPerView: 2,
       spaceBetween: 30,
+      infinite: true,
+      slidesPerGroup: 2,
     },
     320: {
       slidesPerView: 1,
       spaceBetween: 0,
+      infinite: true,
+      slidesPerGroup: 1,
     },
   },
   navigation: {

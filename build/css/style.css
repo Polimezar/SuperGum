@@ -1055,8 +1055,8 @@ button.swiper-pagination-bullet {
 
 @media (max-width: 1199px) {
   .header__logo svg {
-    width: 82px;
-    height: 17px; } }
+    width: 87px;
+    height: 20px; } }
 
 @media (max-width: 767px) {
   .header__logo svg {
@@ -1081,8 +1081,8 @@ button.swiper-pagination-bullet {
               justify-content: center; }
       .header__main img {
         margin-right: 0;
-        width: 100%;
-        height: 100%; } }
+        width: 324px;
+        height: 390px; } }
   @media (max-width: 767px) {
     .header__main {
       -webkit-box-pack: center;
@@ -1160,15 +1160,15 @@ button.swiper-pagination-bullet {
       .header__main-description p {
         font-size: 34px; }
       .header__main-description h1 {
-        font-size: 86px;
+        font-size: 87px;
         line-height: 86px;
         max-width: 235px;
-        margin-top: 0; }
+        margin-top: 3px; }
       .header__main-description ul {
         top: 135px;
         left: 0; }
       .header__main-description a {
-        margin-top: 50px;
+        margin-top: 47px;
         padding: 18px 35px; } }
   @media (max-width: 767px) {
     .header__main-description {
@@ -1400,11 +1400,18 @@ button.swiper-pagination-bullet {
         .gym__video a::after {
           border-width: 6px 0 6px 12px; }
       .gym__video img {
-        width: 100%;
-        height: 100%; } }
+        width: 268px;
+        height: 167px; }
+      .gym__video::after {
+        width: 268px;
+        height: 167px; } }
   @media (max-width: 767px) {
     .gym__video {
-      top: 40px; } }
+      top: 40px; }
+      .gym__video img {
+        width: 320px; }
+      .gym__video::after {
+        width: 320px; } }
 
 .subscription {
   background-color: #f8f9fc;
@@ -1667,7 +1674,7 @@ button.swiper-pagination-bullet {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 113px;
+  padding-top: 118px;
   padding-bottom: 115px; }
   .promo img {
     min-height: 500px;
@@ -1680,7 +1687,7 @@ button.swiper-pagination-bullet {
   @media (max-width: 1199px) {
     .promo {
       min-height: 492px;
-      padding-top: 100px;
+      padding-top: 91px;
       padding-bottom: 100px; }
       .promo img {
         min-height: 292px; } }
@@ -1789,7 +1796,7 @@ button.swiper-pagination-bullet {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 40px 10px; }
+  padding: 40px 30px; }
   .promo__about p {
     font-size: 18px;
     line-height: 27px;
@@ -2339,7 +2346,7 @@ button.swiper-pagination-bullet {
         background-image: url("../img/icon-5-mobile@2x.png"); } }
 
 .promotions {
-  margin-bottom: 119px;
+  margin-bottom: 86px;
   padding-top: 112px; }
   .promotions h2 {
     margin: 0;
@@ -2352,14 +2359,14 @@ button.swiper-pagination-bullet {
     text-align: center; }
   @media (max-width: 1199px) {
     .promotions {
-      margin-bottom: 98px;
+      margin-bottom: 64px;
       padding-top: 89px; }
       .promotions h2 {
         font-size: 42px;
         margin-bottom: 41px; } }
   @media (max-width: 767px) {
     .promotions {
-      margin-bottom: 68px;
+      margin-bottom: 38px;
       padding-top: 57px; }
       .promotions h2 {
         font-size: 32px;
@@ -2746,13 +2753,16 @@ button.swiper-pagination-bullet {
   display: flex;
   padding-top: 42px;
   padding-bottom: 40px; }
+  @media (max-width: 1199px) {
+    .footer__wrapper {
+      padding-top: 44px; } }
   @media (max-width: 767px) {
     .footer__wrapper {
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      padding-top: 48px;
+      padding-top: 44px;
       padding-bottom: 50px;
       -webkit-box-align: center;
           -ms-flex-align: center;
@@ -2780,17 +2790,14 @@ button.swiper-pagination-bullet {
 
 @media (max-width: 1199px) {
   .footer__logo svg {
-    width: 82px;
-    height: 18px; } }
+    width: 83px;
+    height: 13px; } }
 
 @media (max-width: 767px) {
   .footer__logo {
     position: absolute;
-    top: 0;
-    left: 0; }
-    .footer__logo svg {
-      width: 68px;
-      height: 15px; } }
+    top: 5px;
+    left: -14px; } }
 
 .footer__nav {
   display: -webkit-box;
@@ -2808,7 +2815,8 @@ button.swiper-pagination-bullet {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap; }
   .footer__nav li {
-    margin-right: 40px; }
+    margin-right: 40px;
+    margin-bottom: 7px; }
     .footer__nav li:hover, .footer__nav li:focus {
       color: #b6bdcc; }
     .footer__nav li:last-child {
@@ -2835,10 +2843,10 @@ button.swiper-pagination-bullet {
         display: block; }
       .footer__nav li {
         margin-right: 45px;
-        margin-bottom: 20px; }
+        margin-bottom: 23px; }
         .footer__nav li:first-child {
           margin-bottom: 24px;
-          margin-top: 37px; }
+          margin-top: 41px; }
         .footer__nav li:last-child {
           margin-right: 45px;
           margin-bottom: 20px; }
@@ -2869,7 +2877,7 @@ button.swiper-pagination-bullet {
     opacity: 0.8; }
   .footer__social svg.footer__icon-vk {
     width: 24px;
-    height: 13px; }
+    height: 22px; }
   .footer__social svg.footer__icon-in {
     width: 24px;
     height: 24px; }
@@ -2885,8 +2893,7 @@ button.swiper-pagination-bullet {
   @media (max-width: 767px) {
     .footer__social {
       padding-left: 0;
-      margin: 0;
-      margin-top: 15px;
+      margin: 13px 0 0;
       min-width: 290px; }
       .footer__social li {
         margin-right: 35px; }
@@ -2956,8 +2963,8 @@ button.swiper-pagination-bullet {
 @media (max-width: 1199px) {
   .wrapper__form h2,
   .wrapper__contacts h2 {
-    font-size: 42px;
-    line-height: 42px; } }
+    font-size: 43px;
+    line-height: 47px; } }
 
 @media (max-width: 767px) {
   .wrapper__form h2,
@@ -3027,7 +3034,7 @@ button.swiper-pagination-bullet {
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 26px;
+    margin-top: 29px;
     padding: 18px 166px;
     border: 3px solid #ffffff;
     font-size: 14px; }
@@ -3040,7 +3047,7 @@ button.swiper-pagination-bullet {
       max-width: 768px;
       padding-left: 32px; }
       .wrapper__form-inner h2 {
-        margin-bottom: 45px; }
+        margin-bottom: 38px; }
       .wrapper__form-inner input {
         min-width: 206px; }
       .wrapper__form-inner label {
@@ -3107,7 +3114,7 @@ button.swiper-pagination-bullet {
     .wrapper__contacts-inner {
       margin-left: 133px; }
       .wrapper__contacts-inner h2 {
-        margin-bottom: 40px; } }
+        margin-bottom: 33px; } }
   @media (max-width: 767px) {
     .wrapper__contacts-inner {
       margin-left: 0; }
