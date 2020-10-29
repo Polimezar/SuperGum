@@ -1,0 +1,167 @@
+.reviews {
+  margin-top: 118px;
+  margin-bottom: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  max-width: 766px;
+
+  h2 {
+    @include title;
+    color: #102654;
+    margin-bottom: 50px;
+  }
+
+  @media (max-width: 1199px) {
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    h2 {
+      font-size: 42px;
+      line-height: 33px;
+      margin-bottom: 47px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 72px;
+    margin-bottom: 70px;
+    max-width: 320px;
+
+    h2 {
+      font-size: 32px;
+      line-height: 22px;
+      margin-bottom: 50px;
+    }
+  }
+}
+
+.reviews__block {
+  max-width: 560px;
+
+  @media (max-width: 767px) {
+    max-width: 226px;
+  }
+}
+
+.reviews__list {
+  @include list-reset;
+  display: flex;
+}
+
+.reviews__item {
+  display: flex;
+  margin-right: 0;
+  background-color: #1c3374;
+  box-shadow: 0 0 40px rgba(28, 51, 116, 0.2);
+  padding: 56px 60px;
+  height: auto;
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-top: 7px;
+  }
+
+  @media (max-width: 767px) {
+    padding: 40px 25px;
+    padding-bottom: 35px;
+
+    img {
+      width: 68px;
+      height: 68px;
+      margin-top: 0;
+      position: absolute;
+      left: 40px;
+    }
+  }
+}
+
+.reviews__comments {
+  margin-left: 30px;
+
+  h3 {
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    margin-top: 12px;
+    line-height: 22px;
+  }
+
+  @media (max-width: 767px) {
+    margin-left: 0;
+
+    h3 {
+      min-height: 68px;
+      padding-left: 98px;
+      padding-top: 5px;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 15px;
+    }
+  }
+}
+
+.reviews__button-previous,
+.reviews__button-next {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  border-bottom: 1px solid #b8b8b8;
+  border-right: 1px solid #b8b8b8;
+  top: 212px;
+  outline: none;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+  }
+
+  @media (max-width: 767px) {
+    width: 16px;
+    height: 16px;
+    top: 158px;
+  }
+}
+
+.reviews__button-previous {
+  left: 50px;
+  transform: rotate(135deg);
+
+  @media (max-width: 1199px) {
+    left: 50px;
+    top: 190px;
+  }
+
+  @media (max-width: 767px) {
+    left: 18px;
+    top: 230px;
+  }
+}
+
+.reviews__button-next {
+  right: 50px;
+  transform: rotate(-45deg);
+
+  @media (max-width: 1199px) {
+    right: 50px;
+    top: 190px;
+  }
+
+  @media (max-width: 767px) {
+    right: 18px;
+    top: 230px;
+  }
+}

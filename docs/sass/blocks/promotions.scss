@@ -1,0 +1,288 @@
+.promotions {
+  margin-bottom: 86px;
+  padding-top: 112px;
+
+  h2 {
+    @include title;
+    color: #102654;
+    margin-bottom: 55px;
+    text-align: center;
+  }
+
+  @media (max-width: 1199px) {
+    margin-bottom: 64px;
+    padding-top: 89px;
+
+    h2 {
+      font-size: 42px;
+      margin-bottom: 41px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    margin-bottom: 38px;
+    padding-top: 57px;
+
+    h2 {
+      font-size: 32px;
+      margin-bottom: 38px;
+    }
+  }
+}
+
+.promotions__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.promotions__year {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  min-height: auto;
+
+  &:first-child {
+    margin-right: 40px;
+  }
+
+  @media (max-width: 1199px) {
+    &:first-child {
+      margin-right: 0;
+      margin-bottom: 30px;
+    }
+
+    &:last-child {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: block;
+
+    &:first-child {
+      margin-bottom: 28px;
+    }
+  }
+}
+
+.promotions__year-inner {
+  position: relative;
+  max-width: 280px;
+  min-height: 462px;
+  padding: 42px 45px;
+  background-color: #ed0233;
+  color: #ffffff;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 22px;
+    font-size: 28px;
+  }
+
+  span {
+    display: block;
+    margin-top: 2px;
+    font-size: 70px;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  a {
+    margin-top: 187px;
+    font-size: 14px;
+    position: relative;
+    display: inline-block;
+    vertical-align: text-bottom;
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      opacity: 0.6;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      left: 0;
+      height: 1px;
+      bottom: 0;
+      width: 100%;
+      background-color: white;
+    }
+  }
+
+  @media (max-width: 767px) {
+    min-height: 300px;
+    max-width: 290px;
+    text-align: center;
+
+    h3 {
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    a {
+      margin-top: 31px;
+      width: auto;
+
+      &::after {
+        transform: translateX(-50%);
+        left: 50%;
+      }
+    }
+  }
+}
+
+.promotions__img {
+  width: 280px;
+
+  img {
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1199px) {
+    width: 399px;
+  }
+
+  @media (max-width: 767px) {
+    width: 290px;
+  }
+}
+
+.promotions__rest {
+  @include list-reset;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #1c3374;
+
+  p {
+    margin: 0;
+    margin-bottom: 69px;
+    line-height: 22px;
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: 4px;
+    font-size: 26px;
+    line-height: 39px;
+  }
+
+  li {
+    @include list-reset;
+    margin-bottom: 38px;
+    padding: 18px 28px;
+    padding-bottom: 30px;
+    width: 560px;
+    min-height: 212px;
+    border: 7px solid #1c3374;
+    border-image: linear-gradient(to bottom right, #b80027, #003d85);
+    border-image-slice: 1;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    position: relative;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    &:hover,
+    &:focus {
+      opacity: 0.7;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      display: block;
+      left: 0;
+      height: 1px;
+      bottom: -1px;
+      width: 100%;
+      background-color: #1c3374;
+    }
+  }
+
+  @media (max-width: 1199px) {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    li:first-child p {
+      width: 160px;
+      margin-bottom: 47px;
+    }
+
+    li {
+      margin: 0;
+      margin-right: 30px;
+      width: 324px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+
+    li {
+      padding: 29px 28px 40px;
+      margin: 0;
+      margin-bottom: 28px;
+      max-width: 290px;
+      text-align: center;
+    }
+
+    h3 {
+      margin: 0;
+      line-height: 42px;
+    }
+
+    a {
+      margin-top: 28px;
+
+      &::after {
+        transform: translateX(-50%);
+        left: 50%;
+      }
+    }
+
+    li:first-child p {
+      width: 100%;
+      margin-bottom: 25px;
+    }
+
+    p {
+      margin-bottom: 25px;
+      width: auto;
+    }
+  }
+}
