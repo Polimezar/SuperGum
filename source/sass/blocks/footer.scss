@@ -13,7 +13,7 @@
 
   @media (max-width: 767px) {
     flex-direction: column;
-    padding-top: 44px;
+    padding-top: 47px;
     padding-bottom: 50px;
     align-items: center;
   }
@@ -92,6 +92,10 @@
   @media (max-width: 1199px) {
     padding-left: 30px;
 
+    a {
+      line-height: 25px;
+    }
+    
     li {
       margin-right: 30px;
     }
@@ -112,13 +116,13 @@
       margin-bottom: 23px;
 
       &:first-child {
-        margin-bottom: 24px;
+        margin-bottom: 21px;
         margin-top: 41px;
       }
 
       &:last-child {
         margin-right: 45px;
-        margin-bottom: 20px;
+        margin-bottom: 21px;
       }
     }
 
@@ -179,7 +183,7 @@
 
   @media (max-width: 767px) {
     padding-left: 0;
-    margin: 13px 0 0;
+    margin: -7px 0 0;
     min-width: 290px;
 
     li {

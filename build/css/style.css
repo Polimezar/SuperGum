@@ -1192,7 +1192,8 @@ button.swiper-pagination-bullet {
             -ms-flex-pack: center;
                 justify-content: center;
         width: 100%;
-        letter-spacing: 0.5px; } }
+        letter-spacing: 0.5px;
+        margin-top: 50px; } }
 
 .header__social {
   padding: 0;
@@ -1411,7 +1412,11 @@ button.swiper-pagination-bullet {
       .gym__video img {
         width: 320px; }
       .gym__video::after {
-        width: 320px; } }
+        width: 320px; }
+      .gym__video a::after {
+        border-width: 6px 0 6px 9px;
+        left: 54%;
+        top: 49%; } }
 
 .subscription {
   background-color: #f8f9fc;
@@ -1695,7 +1700,10 @@ button.swiper-pagination-bullet {
     .promo {
       min-height: 724px;
       padding-top: 70px;
-      padding-bottom: 70px; } }
+      padding-bottom: 70px; }
+      .promo img {
+        width: 290px;
+        height: 292px; } }
 
 .promo__wrapper {
   display: -webkit-box;
@@ -2594,7 +2602,7 @@ button.swiper-pagination-bullet {
 
 .reviews {
   margin-top: 118px;
-  margin-bottom: 120px;
+  margin-bottom: 123px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2614,14 +2622,15 @@ button.swiper-pagination-bullet {
     line-height: 49px;
     letter-spacing: 0.03em;
     color: #102654;
-    margin-bottom: 50px; }
+    margin-bottom: 53px;
+    line-height: 44px; }
   @media (max-width: 1199px) {
     .reviews {
       margin-top: 100px;
       margin-bottom: 100px; }
       .reviews h2 {
         font-size: 42px;
-        line-height: 33px;
+        line-height: 30px;
         margin-bottom: 47px; } }
   @media (max-width: 767px) {
     .reviews {
@@ -2762,7 +2771,7 @@ button.swiper-pagination-bullet {
       -webkit-box-direction: normal;
           -ms-flex-direction: column;
               flex-direction: column;
-      padding-top: 44px;
+      padding-top: 47px;
       padding-bottom: 50px;
       -webkit-box-align: center;
           -ms-flex-align: center;
@@ -2830,6 +2839,8 @@ button.swiper-pagination-bullet {
   @media (max-width: 1199px) {
     .footer__nav {
       padding-left: 30px; }
+      .footer__nav a {
+        line-height: 25px; }
       .footer__nav li {
         margin-right: 30px; } }
   @media (max-width: 767px) {
@@ -2848,11 +2859,11 @@ button.swiper-pagination-bullet {
         margin-right: 45px;
         margin-bottom: 23px; }
         .footer__nav li:first-child {
-          margin-bottom: 24px;
+          margin-bottom: 21px;
           margin-top: 41px; }
         .footer__nav li:last-child {
           margin-right: 45px;
-          margin-bottom: 20px; }
+          margin-bottom: 21px; }
       .footer__nav a {
         font-size: 16px;
         line-height: 19px; } }
@@ -2896,7 +2907,7 @@ button.swiper-pagination-bullet {
   @media (max-width: 767px) {
     .footer__social {
       padding-left: 0;
-      margin: 13px 0 0;
+      margin: -7px 0 0;
       min-width: 290px; }
       .footer__social li {
         margin-right: 35px; }
@@ -3037,7 +3048,7 @@ button.swiper-pagination-bullet {
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
-    margin-top: 29px;
+    margin-top: 25px;
     padding: 18px 166px;
     border: 3px solid #ffffff;
     font-size: 14px; }
@@ -3056,7 +3067,8 @@ button.swiper-pagination-bullet {
       .wrapper__form-inner label {
         margin-right: 60px; }
       .wrapper__form-inner button {
-        padding: 16px 198px; } }
+        padding: 16px 198px;
+        margin-top: 30px; } }
   @media (max-width: 767px) {
     .wrapper__form-inner {
       margin: 0;
@@ -3103,14 +3115,15 @@ button.swiper-pagination-bullet {
   @media (max-width: 1199px) {
     .wrapper__contacts {
       border: none;
-      min-width: 768px; } }
+      min-width: 768px;
+      padding: 64px 0; } }
   @media (max-width: 767px) {
     .wrapper__contacts {
       min-width: 320px;
-      padding: 66px 15px; } }
+      padding: 65px 15px; } }
 
 .wrapper__contacts-inner {
-  margin-left: 121px; }
+  margin-left: 123px; }
   .wrapper__contacts-inner h2 {
     margin-bottom: 46px; }
   @media (max-width: 1199px) {
@@ -3176,7 +3189,9 @@ button.swiper-pagination-bullet {
     .wrapper__contacts-row p,
     .wrapper__contacts-row a {
       font-size: 18px;
-      line-height: 30px; } }
+      line-height: 30px; }
+    .wrapper__contacts-row li {
+      margin-top: 19px; } }
   @media (max-width: 767px) {
     .wrapper__contacts-row {
       -webkit-box-orient: vertical;
@@ -3188,4 +3203,6 @@ button.swiper-pagination-bullet {
       .wrapper__contacts-row ul:first-child {
         margin-right: 0; }
       .wrapper__contacts-row ul:last-child {
-        margin-top: 22px; } }
+        margin-top: 22px; }
+      .wrapper__contacts-row h3 {
+        line-height: 29px; } }

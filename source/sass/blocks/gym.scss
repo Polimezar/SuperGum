@@ -229,5 +229,11 @@
     &::after {
       width: 320px;
     }
+
+    a::after {
+      border-width: 6px 0 6px 9px;
+      left: 54%;
+      top: 49%
+    }
   }
 }

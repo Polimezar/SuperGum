@@ -115,7 +115,7 @@
 
   button {
     @include button-style;
-    margin-top: 29px;
+    margin-top: 25px;
     padding: 18px 166px;
     border: 3px solid #ffffff;
     font-size: 14px;
@@ -140,6 +140,7 @@
 
     button {
       padding: 16px 198px;
+      margin-top: 30px;
     }
   }
 
@@ -186,16 +187,17 @@
   @media (max-width: 1199px) {
     border: none;
     min-width: 768px;
+    padding: 64px 0;
   }
 
   @media (max-width: 767px) {
     min-width: 320px;
-    padding: 66px 15px;
+    padding: 65px 15px;
   }
 }
 
 .wrapper__contacts-inner {
-  margin-left: 121px;
+  margin-left: 123px;
 
   h2 {
     margin-bottom: 46px;
@@ -297,6 +299,10 @@
       font-size: 18px;
       line-height: 30px;
     }
+
+    li {
+      margin-top: 19px;
+    }
   }
 
   @media (max-width: 767px) {
@@ -314,6 +320,10 @@
       &:last-child {
         margin-top: 22px;
       }
+    }
+
+    h3 {
+      line-height: 29px;
     }
   }
 }

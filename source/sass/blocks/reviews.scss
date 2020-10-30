@@ -1,6 +1,6 @@
 .reviews {
   margin-top: 118px;
-  margin-bottom: 120px;
+  margin-bottom: 123px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +10,8 @@
   h2 {
     @include title;
     color: #102654;
-    margin-bottom: 50px;
+    margin-bottom: 53px;
+    line-height: 44px;
   }
 
   @media (max-width: 1199px) {
@@ -19,7 +20,7 @@
 
     h2 {
       font-size: 42px;
-      line-height: 33px;
+      line-height: 30px;
       margin-bottom: 47px;
     }
   }
