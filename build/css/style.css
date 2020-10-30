@@ -2574,10 +2574,7 @@ button.swiper-pagination-bullet {
           margin-right: 0; } }
   @media (max-width: 767px) {
     .promotions__rest {
-      -webkit-box-orient: vertical;
-      -webkit-box-direction: normal;
-          -ms-flex-direction: column;
-              flex-direction: column; }
+      margin-left: 15px; }
       .promotions__rest li {
         padding: 29px 28px 40px;
         margin: 0;
